@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleFighter : MonoBehaviour
 {
-    public int team; //team of the fighter
+    public int team; //team of the fighter. 0 = player, 1 = AI
     public string name;
     public int hp;
     public int mp;

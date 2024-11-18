@@ -6,6 +6,9 @@ public class BattleFighter : MonoBehaviour
 {
     public int team; //team of the fighter. 0 = player, 1 = AI
     public string name;
+    public int maxHp;
+    public int maxMp;
+
     public int hp;
     public int mp;
     public int attack;
@@ -21,6 +24,8 @@ public class BattleFighter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hp = maxHp;
+        mp = maxMp;
     }
 
     // Update is called once per frame

@@ -9,8 +9,9 @@ public class Attack : MonoBehaviour
     public float defenseScale;
     public int mpCost;
     public int accuracy;
-    public void AttackEffect(BattleFighter attacker, BattleFighter defender)
-    {
 
+    public virtual void AttackEffect(BattleFighter attacker, BattleFighter defender)
+    {
+        Debug.Log("Attack effect");
     }
 }

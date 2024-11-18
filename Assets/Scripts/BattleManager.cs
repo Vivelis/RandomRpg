@@ -16,6 +16,8 @@ public class BattleManager : MonoBehaviour
     public AudioClip battleMusic; //music used during the battle
     int winner = -1; //the team that won
 
+    public Canvas canvas;
+
     // UI ------------------------------------------------
     public Transform team0UIData; 
     public Transform team1UIData;
@@ -25,27 +27,39 @@ public class BattleManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        //Initialize the fighter list
+        int team0Index = 0;
+        int team1Index = 0;
+        Vector3 baseSpawnPosition = new Vector3(3, 1, 0); //subsequent units will spawn at +-2.5 Z on the sides
+
         foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
             battleFighters.Add(obj.GetComponent<BattleFighter>());
+            if (obj.GetComponent<BattleFighter>().team == 0) {
+                if (team0Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team0Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                team0Index++;
+            }  else {
+                if (team1Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team1Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                Vector3 position = obj.transform.position;
+                obj.transform.position = new Vector3(-position.x, position.y, position.z);
+                team1Index++;
+            }
         }
         Debug.Log("Battle Fighters: " + battleFighters.Count);
 
-        //spawn the UI elements
-        int team0Index = 0;
-        int team1Index = 0;
-        Vector3 spawnPositionOffset = new Vector3(-178, 36, 0); //this is the spawn position relative to ui border
-        foreach (BattleFighter fighter in battleFighters) {
-            GameObject fighterUIDataObj = Instantiate(fighterUIDataPrefab, fighter.transform.position, Quaternion.identity);
-            FighterUIData fighterUIData = fighterUIDataObj.GetComponent<FighterUIData>();
-
-            fighterUIData.fighter = fighter;
-
-            if (fighter.team == 0) {
-                fighterUIDataObj.transform.position = team0UIData.position + spawnPositionOffset + new Vector3(0, team0Index * 2.5f, 0);
-            } else {
-                //fighterUIData.Tranform = team1UIData + spawnPositionOffset + new Vector3(0, team0Index * 2.5f, 0);
-            }
-        }
+        //spawn the basic UI elements
+        InitUI();
     }
 
     // Update is called once per frame
@@ -63,7 +77,6 @@ public class BattleManager : MonoBehaviour
             case 0:
                 //start of battle
                 //set music to battleMusic
-                //spawn the fighters in the appropriate positions
                 battleState = 1;
                 break;
             case 1:
@@ -108,6 +121,27 @@ public class BattleManager : MonoBehaviour
                 break;
         }
         //Debug.Log("Battle State: " + battleState);
+    }
+
+    void InitUI() {
+        int team0Index = 0;
+        int team1Index = 0;
+        Vector3 spawnPositionOffset = new Vector3(-182, 40, 0); //this is the spawn position relative to ui border
+        foreach (BattleFighter fighter in battleFighters) {
+            GameObject fighterUIDataObj = Instantiate(fighterUIDataPrefab, fighter.transform.position, Quaternion.identity);
+            FighterUIData fighterUIData = fighterUIDataObj.GetComponent<FighterUIData>();
+            fighterUIData.transform.SetParent(canvas.transform, false);
+
+            fighterUIData.fighter = fighter;
+
+            if (fighter.team == 0) {
+                fighterUIDataObj.transform.position = team0UIData.position + spawnPositionOffset + new Vector3(0, team0Index * -40f, 0);
+                team0Index++;
+            } else {
+                fighterUIDataObj.transform.position = team1UIData.position + spawnPositionOffset + new Vector3(0, team1Index * -40f, 0);
+                team1Index++;
+            }
+        }
     }
 
     void ATBprogress() {

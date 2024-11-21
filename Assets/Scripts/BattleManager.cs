@@ -25,6 +25,10 @@ public class BattleManager : MonoBehaviour
     public GameObject fighterUIDataPrefab;
     // ----------------------------------------------------
 
+    BattleFighter currentActor;
+    BattleFighter currentTarget;
+    Attack currentAttack;
+
     // Start is called before the first frame update
     void Start() {
         //Initialize the fighter list
@@ -85,7 +89,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case 2:
                 //fighterAction selection
-                BattleFighter currentActor = battleFighters[turn];
+                currentActor = battleFighters[turn];
                 if (currentActor.team == 0) {
                     //player turn
                     ActionSelection(currentActor);
@@ -97,6 +101,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case 3:
                 //fighterAction
+                ExecuteAction(currentActor, currentTarget, currentAttack);
                 battleState = 4;
                 break;
             case 4:
@@ -150,7 +155,7 @@ public class BattleManager : MonoBehaviour
         //ATB in progress
         foreach (BattleFighter fighter in battleFighters) {
             //increase the atb of all fighters
-            fighter.atb += fighter.speed;
+            fighter.atb += fighter.speed * Time.deltaTime * 45;
         }
 
         //check if any fighter has reached 1000
@@ -182,11 +187,42 @@ public class BattleManager : MonoBehaviour
     }
 
     void AIActionSelection(BattleFighter currentActor) {
-        Debug.Log("AI turn: " + currentActor.name + " did something");
+        if (currentActor.attacks.Count > 0) {
+            int randomIndex = Random.Range(0, currentActor.attacks.Count);
+            currentAttack = currentActor.attacks[randomIndex];
+            int randomTargetIndex = Random.Range(0, battleFighters.Count);
+            currentTarget = battleFighters[randomTargetIndex];
+            
+            //prevents attacks on allies
+            while (currentTarget.team == currentActor.team && TurnCheck() == -1) {
+                randomTargetIndex = Random.Range(0, battleFighters.Count);
+                currentTarget = battleFighters[randomTargetIndex];
+            }
 
+            Debug.Log(currentActor.name + " selected attack: " + currentAttack.name + " on " + currentTarget.name);
+        } else {
+            Debug.Log(currentActor.name + " has no attacks available.");
+        }
+        battleState = 4;
     }
+    
     void ActionSelection(BattleFighter currentActor) {
         Debug.Log("Player turn: " + currentActor.name + " did something");
+        currentActor = null;
+        currentTarget = null;
+        currentAttack = null;
+    }
+
+    void ExecuteAction(BattleFighter currentActor, BattleFighter currentTarget, Attack currentAttack) {
+        if (currentActor == null || currentTarget == null || currentAttack == null) {
+            Debug.Log("Invalid action");
+            return;
+        }
+        if (currentActor == null) Debug.Log("currentActor is null");
+        if (currentTarget == null) Debug.Log("currentTarget is null");
+        if (currentAttack == null) Debug.Log("currentAttack is null");
+
+        bool result = currentActor.callAttack(currentAttack, currentTarget);
     }
 
     int TurnCheck() {

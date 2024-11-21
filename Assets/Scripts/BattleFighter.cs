@@ -33,22 +33,25 @@ public class BattleFighter : MonoBehaviour
     {
     }
 
-    bool callAttack(Attack attack, BattleFighter target) {
+    public bool callAttack(Attack attack, BattleFighter target) {
         
         //resource check
         if (attack.mpCost > mp) {
             return false;
         }
+
+        mp -= attack.mpCost;
         attack.AttackEffect(this, target);
         return true;
     }
 
-    void takeDamage(int damage) {
+    public void takeDamage(int damage) {
         hp -= damage;
 
         if (hp <= 0) { //on death
             hp = 0;
             status = 0;
+            Debug.Log(name + " died.");
         }
     }
 }

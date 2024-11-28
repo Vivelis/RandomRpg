@@ -1,0 +1,252 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BattleManager : MonoBehaviour
+{
+    int turn = 0; //this variable is used to determine whose turn it is
+    int battleState = 0; //this variable is used to determine the state of the battle
+    //0 = start of battle
+    //1 = ATB in progress
+    //2 = fighterAction selection
+    //3 = fighterAction
+    //4 = fighter state check
+    //5 = end of battle
+    public List<BattleFighter> battleFighters = new List<BattleFighter>(); //this is a list of all the fighters in the battle
+    public AudioClip battleMusic; //music used during the battle
+    int winner = -1; //the team that won
+
+    public Canvas canvas;
+
+    // UI ------------------------------------------------
+    public Transform team0UIData; 
+    public Transform team1UIData;
+
+    public GameObject fighterUIDataPrefab;
+    // ----------------------------------------------------
+
+    BattleFighter currentActor;
+    BattleFighter currentTarget;
+    Attack currentAttack;
+
+    // Start is called before the first frame update
+    void Start() {
+        //Initialize the fighter list
+        int team0Index = 0;
+        int team1Index = 0;
+        Vector3 baseSpawnPosition = new Vector3(3, 1, 0); //subsequent units will spawn at +-2.5 Z on the sides
+
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
+            battleFighters.Add(obj.GetComponent<BattleFighter>());
+            if (obj.GetComponent<BattleFighter>().team == 0) {
+                if (team0Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team0Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                team0Index++;
+            }  else {
+                if (team1Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team1Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                Vector3 position = obj.transform.position;
+                obj.transform.position = new Vector3(-position.x, position.y, position.z);
+                team1Index++;
+            }
+        }
+        Debug.Log("Battle Fighters: " + battleFighters.Count);
+
+        //spawn the basic UI elements
+        InitUI();
+    }
+
+    // Update is called once per frame
+    void Update() {
+        /*
+        Once the battle has started, any initiation code will occur in state 0.
+        After this is done, the battle will loop from state 1 to 4 until all fighters of one team are dead.
+        In state 1. All the action bars of the fighters will increase until one of them has reached 1000.
+        Once one of the action bars has reached 1000, the battle will move to state 2. In state 2, the player or AI will be able to select a fighter to attack and move to state 3.
+        In state 3, the attack is executed, and effects are applied. The battle will then move to state 4.
+        In state 4, the state of the fighters will be checked. Once that is done, if any team won the battle, the battle goes to state 5, otherwise, it goes back to state 1 and waits for the next full action bar.
+        */
+
+        switch (battleState) {
+            case 0:
+                //start of battle
+                //set music to battleMusic
+                battleState = 1;
+                break;
+            case 1:
+                //ATB in progress
+                ATBprogress();
+                break;
+            case 2:
+                //fighterAction selection
+                currentActor = battleFighters[turn];
+                if (currentActor.team == 0) {
+                    //player turn
+                    ActionSelection(currentActor);
+                } else {
+                    //AI turn
+                    AIActionSelection(currentActor);
+                }
+                battleState = 3;
+                break;
+            case 3:
+                //fighterAction
+                ExecuteAction(currentActor, currentTarget, currentAttack);
+                battleState = 4;
+                break;
+            case 4:
+                //fighter state check
+                int result = TurnCheck();
+                if (result != -1) {
+                    //team 0 wins
+                    winner = result;
+                    battleState = 5;
+                } else {
+                    battleState = 1;
+                }
+                break;
+            case 5:
+                //end of battle
+                if (winner == 0) {
+                    Debug.Log("Player wins!");
+                    //code to gain experience/rewards here
+                } else {
+                    Debug.Log("AI wins!");
+                }
+                break;
+        }
+        //Debug.Log("Battle State: " + battleState);
+    }
+
+    void InitUI() {
+        int team0Index = 0;
+        int team1Index = 0;
+        Vector3 spawnPositionOffset = new Vector3(-182, 40, 0); //this is the spawn position relative to ui border
+        foreach (BattleFighter fighter in battleFighters) {
+            GameObject fighterUIDataObj = Instantiate(fighterUIDataPrefab, fighter.transform.position, Quaternion.identity);
+            FighterUIData fighterUIData = fighterUIDataObj.GetComponent<FighterUIData>();
+            fighterUIData.transform.SetParent(canvas.transform, false);
+
+            fighterUIData.fighter = fighter;
+
+            if (fighter.team == 0) {
+                fighterUIDataObj.transform.position = team0UIData.position + spawnPositionOffset + new Vector3(0, team0Index * -40f, 0);
+                team0Index++;
+            } else {
+                fighterUIDataObj.transform.position = team1UIData.position + spawnPositionOffset + new Vector3(0, team1Index * -40f, 0);
+                team1Index++;
+            }
+        }
+    }
+
+    void ATBprogress() {
+        string currentATBs = "";
+
+        //ATB in progress
+        foreach (BattleFighter fighter in battleFighters) {
+            //increase the atb of all fighters
+            fighter.atb += fighter.speed * Time.deltaTime * 45;
+        }
+
+        //check if any fighter has reached 1000
+        BattleFighter highestATBFighter = null;
+        float highestATBValue = 0;
+
+        foreach (BattleFighter fighter in battleFighters) {
+            if (fighter.atb >= 1000) {
+                //get the fighter with the highest atb if there are multiple ones above 1000
+                if (highestATBFighter == null) {
+                    highestATBFighter = fighter;
+                    highestATBValue = fighter.atb;
+                } else if (fighter.atb > highestATBValue) {
+                    highestATBFighter = fighter;
+                    highestATBValue = fighter.atb;
+                }
+            }
+            currentATBs += fighter.name + ": " + fighter.atb + ", ";
+        }
+
+        //Debug.Log(currentATBs);
+
+        if (highestATBFighter != null) {
+            //highestATBFighter has reached 1000, move to state 2
+            turn = battleFighters.IndexOf(highestATBFighter);
+            battleState = 2;
+            highestATBFighter.atb = 0;
+        }
+    }
+
+    void AIActionSelection(BattleFighter currentActor) {
+        if (currentActor.attacks.Count > 0) {
+            int randomIndex = Random.Range(0, currentActor.attacks.Count);
+            currentAttack = currentActor.attacks[randomIndex];
+            int randomTargetIndex = Random.Range(0, battleFighters.Count);
+            currentTarget = battleFighters[randomTargetIndex];
+            
+            //prevents attacks on allies
+            while (currentTarget.team == currentActor.team && TurnCheck() == -1) {
+                randomTargetIndex = Random.Range(0, battleFighters.Count);
+                currentTarget = battleFighters[randomTargetIndex];
+            }
+
+            Debug.Log(currentActor.name + " selected attack: " + currentAttack.name + " on " + currentTarget.name);
+        } else {
+            Debug.Log(currentActor.name + " has no attacks available.");
+        }
+        battleState = 4;
+    }
+    
+    void ActionSelection(BattleFighter currentActor) {
+        Debug.Log("Player turn: " + currentActor.name + " did something");
+        currentActor = null;
+        currentTarget = null;
+        currentAttack = null;
+    }
+
+    void ExecuteAction(BattleFighter currentActor, BattleFighter currentTarget, Attack currentAttack) {
+        if (currentActor == null || currentTarget == null || currentAttack == null) {
+            Debug.Log("Invalid action");
+            return;
+        }
+        if (currentActor == null) Debug.Log("currentActor is null");
+        if (currentTarget == null) Debug.Log("currentTarget is null");
+        if (currentAttack == null) Debug.Log("currentAttack is null");
+
+        bool result = currentActor.callAttack(currentAttack, currentTarget);
+    }
+
+    int TurnCheck() {
+        var team0Alive = false;
+        var team1Alive = false;
+
+        foreach (BattleFighter fighter in battleFighters) {
+            if (fighter.hp > 0) {
+                if (fighter.team == 0) {
+                    team0Alive = true;
+                } else {
+                    team1Alive = true;
+                }
+            } else {
+                fighter.status = 0;
+            }
+        }
+
+        if (team0Alive == false) {
+            return 1;
+        } else if (team1Alive == false) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
+}

@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2282705d14a03054bad108ca14b4070e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _newGameLevel: SampleScene
+  _newGameLevel: IntroductionScene
   noSavedGameDialog: {fileID: 1592520155}
   ConfirmationPrompt: {fileID: 1923964860}
   GameTitle: {fileID: 857162961}

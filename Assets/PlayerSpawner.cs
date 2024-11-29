@@ -11,23 +11,23 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Start()
     {
-        string previousScene = GameManager.Instance.PreviousScene;
-
-        // Recherche la configuration correspondant à la scène précédente
-        foreach (var config in spawnConfigurations)
+        if (GameManager.Instance.PreviousScene != null)
         {
-            if (config.sceneName == previousScene)
+            string previousScene = GameManager.Instance.PreviousScene;
+            foreach (var config in spawnConfigurations)
             {
-                // Applique la position et l'orientation configurées
-                transform.position = config.spawnPosition;
-                transform.rotation = Quaternion.Euler(0, config.spawnRotationY, 0);
-                return;
+                if (config.sceneName == previousScene)
+                {
+                    // Applique la position et l'orientation configurées
+                    transform.position = config.spawnPosition;
+                    transform.rotation = Quaternion.Euler(0, config.spawnRotationY, 0);
+                    return;
+                }
             }
+        } else {
+            transform.position = defaultSpawnPosition;
+            transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
         }
-
-        // Applique la position et l'orientation par défaut si aucune correspondance n'est trouvée
-        transform.position = defaultSpawnPosition;
-        transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
     }
 }
 

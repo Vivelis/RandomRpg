@@ -40,6 +40,16 @@ public class DoorScript : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
+            Debug.Log($"Chargement de la scène : {sceneName} depuis {SceneManager.GetActiveScene().name}");
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Aucun nom de scène défini !");
+        }
+
+        if (!string.IsNullOrEmpty(sceneName))
+        {
             GameManager.Instance.PreviousScene = SceneManager.GetActiveScene().name;
 
             SceneManager.LoadScene(sceneName);

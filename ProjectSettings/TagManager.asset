@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BattleFighter
   - PNJ
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

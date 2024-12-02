@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Assertions;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -38,6 +39,13 @@ public class MainMenuController : MonoBehaviour
     private int _resolutionIndex;
     private int _qualityLevel;
     private bool _isFullScreen;
+
+    private DataPersistenceManager _dataPersistenceManager;
+
+    private void Awake() {
+        _dataPersistenceManager = FindObjectOfType<DataPersistenceManager>();
+        Assert.IsNotNull(_dataPersistenceManager, "DataPersistenceManager not found in scene");
+    }
 
     private void Start()
     {

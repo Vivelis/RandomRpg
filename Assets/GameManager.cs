@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,5 +18,28 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneUnloaded(Scene scene)
+    {
+        QuestManager.instance.SaveGameState();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        QuestManager.instance.LoadGameState();
+        QuestManager.instance.SetupPNJsInScene();
     }
 }

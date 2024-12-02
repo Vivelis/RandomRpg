@@ -1,0 +1,675 @@
+{
+  "questData": [
+    {
+      "questId": "1",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 0,
+              "action": true
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 2
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "2",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 0,
+              "action": true
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "3",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 2
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 0,
+              "action": true
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "4",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 2
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 0,
+              "action": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "5",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 2
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 1,
+              "action": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "6",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 1,
+              "action": true
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "7",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 0,
+              "action": true
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "8",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 4
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 1,
+              "action": true
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 0
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "9",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 4
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 1
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 4
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": true,
+              "dialogueState": 0,
+              "action": true
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "10",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 4
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 1
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 4
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": true,
+              "dialogueState": 1,
+              "action": true
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questId": "11",
+      "scenes": [
+        {
+          "sceneName": "Village",
+          "pnjStatuses": [
+            {
+              "pnjName": "Garde",
+              "active": true,
+              "dialogueState": 3
+            },
+            {
+              "pnjName": "Chef_village",
+              "active": true,
+              "dialogueState": 4
+            },
+            {
+              "pnjName": "Mother",
+              "active": true,
+              "dialogueState": 1
+            },
+            {
+              "pnjName": "Soigneur",
+              "active": true,
+              "dialogueState": 0
+            },
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 1
+            }
+          ]
+        },
+        {
+          "sceneName": "Boss",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": true,
+              "dialogueState": 4,
+              "action": true
+            },
+            {
+              "pnjName": "Roi démon",
+              "active": false,
+              "dialogueState": 1
+            }
+          ]
+        },
+        {
+          "sceneName": "Forest",
+          "pnjStatuses": [
+            {
+              "pnjName": "Compagnon",
+              "active": false,
+              "dialogueState": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

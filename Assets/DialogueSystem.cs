@@ -1,35 +1,65 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class DialogueSystem : MonoBehaviour
 {
-    public TextMeshProUGUI dialogueText; // Texte affiché à l'écran
-    public GameObject panel; // Référence au panneau de dialogue
-    public string[] dialogues; // Liste des dialogues du PNJ
-    private int currentDialogueIndex = 0; // Index du dialogue actuel
-    private bool isDialogueActive = false; // Indique si un dialogue est en cours
-    public PNJInteractionWithCharacterController playerController; // Référence au joueur
+    public TextMeshProUGUI dialogueText;
+    public GameObject panel;
+    public string pnjName;
+    public PNJInteractionWithCharacterController playerController;
+
+    [System.Serializable]
+    public class QuestDialogue
+    {
+        public int questState;
+        public List<string> dialogues;
+    }
+
+    public List<QuestDialogue> questDialogues = new List<QuestDialogue>();
+
+    private int currentDialogueIndex = 0;
+    private bool isDialogueActive = false;
+    private int dialogueState;
+    private bool actionRequired = false;
+
+    public void UpdateStatus(PNJStatus status)
+    {
+        dialogueState = status.dialogueState;
+        actionRequired = status.action;
+        gameObject.SetActive(status.active);
+    }
 
     public void StartDialogue()
     {
-        panel.SetActive(true); // Active le panneau de dialogue
-        if (dialogues.Length > 0)
+        if (dialogueState >= 0 && dialogueState < questDialogues.Count)
         {
-            isDialogueActive = true;
-            currentDialogueIndex = 0;
-            ShowDialogue();
+            var dialogues = questDialogues[dialogueState].dialogues;
+
+            if (dialogues.Count > 0)
+            {
+                panel.SetActive(true);
+                isDialogueActive = true;
+                currentDialogueIndex = 0;
+                ShowDialogue(dialogues);
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"PNJ {pnjName}: DialogueState {dialogueState} est hors des limites.");
         }
     }
 
     public void ContinueDialogue()
     {
-        if (isDialogueActive)
+        if (isDialogueActive && dialogueState >= 0 && dialogueState < questDialogues.Count)
         {
+            var dialogues = questDialogues[dialogueState].dialogues;
+
             currentDialogueIndex++;
-            if (currentDialogueIndex < dialogues.Length)
+            if (currentDialogueIndex < dialogues.Count)
             {
-                ShowDialogue();
+                ShowDialogue(dialogues);
             }
             else
             {
@@ -38,7 +68,7 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    private void ShowDialogue()
+    private void ShowDialogue(List<string> dialogues)
     {
         dialogueText.text = dialogues[currentDialogueIndex];
     }
@@ -47,32 +77,16 @@ public class DialogueSystem : MonoBehaviour
     {
         isDialogueActive = false;
         dialogueText.text = "";
+        panel.SetActive(false);
 
-        HealerNPC healer = FindObjectOfType<HealerNPC>();
-        if (healer != null)
-        {
-            healer.HealPlayers();
-        }
         if (playerController != null)
         {
-            panel.SetActive(false);
             playerController.EndDialogue();
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (actionRequired)
         {
-            playerController = other.GetComponent<PNJInteractionWithCharacterController>();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerController = null;
+            QuestManager.instance.AdvanceQuestState();
         }
     }
 }

@@ -7,7 +7,7 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private string sceneName;
 
     [Header("Message d'interaction (facultatif)")]
-    [SerializeField] private string interactionMessage = "Appuyez sur E pour entrer";
+    [SerializeField] private string interactionMessage = "Entrer";
 
     private bool isPlayerInRange = false;
 
@@ -16,7 +16,6 @@ public class DoorScript : MonoBehaviour
         if (other.gameObject.GetComponent<CharacterController>() || other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            Debug.Log(interactionMessage);
         }
     }
 
@@ -40,7 +39,6 @@ public class DoorScript : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
-            Debug.Log($"Chargement de la scène : {sceneName} depuis {SceneManager.GetActiveScene().name}");
             SceneManager.LoadScene(sceneName);
         }
         else

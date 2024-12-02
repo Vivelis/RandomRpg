@@ -21,9 +21,10 @@ public class TransparencyManager : MonoBehaviour
 
     private void Update() {
         List<GameObject> objectsInTheWay = GetAllObjectsInTheWay();
-        objectsInTheWay = objectsInTheWay.Except(transparentObjects).ToList();
-        MakeObjectsTransparent(objectsInTheWay);
-        MakeObjectsSolid(objectsInTheWay);
+        List<GameObject> objectsToTurnTransparent = objectsInTheWay.Except(transparentObjects).ToList();
+        List<GameObject> objectsToTurnSolid = transparentObjects.Except(objectsInTheWay).ToList();
+        MakeObjectsTransparent(objectsToTurnTransparent);
+        MakeObjectsSolid(objectsToTurnSolid);
     }
 
     private List<GameObject> GetAllObjectsInTheWay() {
@@ -59,14 +60,8 @@ public class TransparencyManager : MonoBehaviour
         }
     }
 
-    private void MakeObjectsSolid(List<GameObject> objectsToExclude) {
-        List<GameObject> objectsToReset = new List<GameObject>();
-        foreach (var obj in transparentObjects) {
-            if (!objectsToExclude.Contains(obj)) {
-                objectsToReset.Add(obj);
-            }
-        }
-        foreach (var obj in objectsToReset) {
+    private void MakeObjectsSolid(List<GameObject> objects) {
+        foreach (var obj in objects) {
             Renderer renderer = obj.GetComponent<Renderer>();
             if (renderer != null) {
                 ResetTransparency(renderer);

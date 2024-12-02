@@ -108,9 +108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  followDistance: 10
-  height: 6
-  lookDownAngle: 35
+  followDistance: 80
+  height: 60
+  lookDownAngle: 40
 --- !u!114 &5973660774287709873
 MonoBehaviour:
   m_ObjectHideFlags: 0

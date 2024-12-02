@@ -49,3 +49,4 @@ MonoBehaviour:
   magicScale: 0
   mpCost: 0
   accuracy: 70
+  targetSetting: 1

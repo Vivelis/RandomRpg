@@ -9,6 +9,7 @@ public class Attack : MonoBehaviour
     public float magicScale;
     public int mpCost;
     public int accuracy;
+    public int targetSetting; //setting: 0 = ally, 1 = enemy, 2 = self, 3 = all
 
     public virtual void AttackEffect(BattleFighter attacker, BattleFighter defender)
     {

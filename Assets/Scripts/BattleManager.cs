@@ -23,11 +23,14 @@ public class BattleManager : MonoBehaviour
     public Transform team1UIData;
 
     public GameObject fighterUIDataPrefab;
+
+    public BattleMenu battleMenu;
     // ----------------------------------------------------
 
     BattleFighter currentActor;
     BattleFighter currentTarget;
     Attack currentAttack;
+    bool attackUIstarted = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -96,8 +99,8 @@ public class BattleManager : MonoBehaviour
                 } else {
                     //AI turn
                     AIActionSelection(currentActor);
+                    battleState = 3;
                 }
-                battleState = 3;
                 break;
             case 3:
                 //fighterAction
@@ -147,6 +150,9 @@ public class BattleManager : MonoBehaviour
                 team1Index++;
             }
         }
+
+        //battleMenu initiation
+        battleMenu.battleFighters = battleFighters;
     }
 
     void ATBprogress() {
@@ -207,10 +213,22 @@ public class BattleManager : MonoBehaviour
     }
     
     void ActionSelection(BattleFighter currentActor) {
-        Debug.Log("Player turn: " + currentActor.name + " did something");
-        currentActor = null;
-        currentTarget = null;
-        currentAttack = null;
+        if (attackUIstarted == false) { //initiate the attack UI
+            currentTarget = null;
+            currentAttack = null;
+
+            Debug.Log("Battle menu opened");
+            battleMenu.OpenMenu(currentActor);
+            attackUIstarted = true;
+        } else { //wait for the player to select an action
+            if (battleMenu.currentAttack != null && battleMenu.currentTarget != null) {
+                Debug.Log("Player turn: " + currentActor.name + " did " + battleMenu.currentAttack.name + " on " + battleMenu.currentTarget.name);
+                currentAttack = battleMenu.currentAttack;
+                currentTarget = battleMenu.currentTarget;
+                battleState = 3;
+                attackUIstarted = false;
+            }
+        }
     }
 
     void ExecuteAction(BattleFighter currentActor, BattleFighter currentTarget, Attack currentAttack) {
@@ -240,6 +258,9 @@ public class BattleManager : MonoBehaviour
                 fighter.status = 0;
             }
         }
+
+        //update the menu
+        //battleMenu.battleFighters = battleFighters;
 
         if (team0Alive == false) {
             return 1;

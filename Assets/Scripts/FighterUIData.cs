@@ -14,7 +14,7 @@ public class FighterUIData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nameText.text = fighter.name;
+        nameText.text = fighter.name + " " + "lvl: " + fighter.level;
     }
 
     // Update is called once per frame

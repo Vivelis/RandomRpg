@@ -15,6 +15,7 @@ public class BattleMenu : MonoBehaviour
     public Attack currentAttack = null;
     public BattleFighter currentTarget = null;
     public Attack baseAttack;
+    public Attack FleeAttack;
 
     //-Menus---------------------------------------
     public GameObject mainBmenu;
@@ -43,17 +44,22 @@ public class BattleMenu : MonoBehaviour
     }
 
     //Returns the precise selected action. Can be an attack or battle options such as run
-    public void CloseMenu(Attack attack, BattleFighter target) {
+    public void CloseMenu() {
         menuActive = false;
         mainBmenu.SetActive(false);
-        currentAttack = attack;
-        currentTarget = target;
     }
 
     public void SelectBaseAttack() {
         Debug.Log("Selected base attack");
         currentAttack = baseAttack;
         SelectTarget(currentAttack.targetSetting);
+    }
+
+    public void SelectRunAway() {
+        Debug.Log("Selected run away");
+        currentAttack = FleeAttack;
+        currentTarget = currentActor;
+        CloseMenu();
     }
 
     public void SelectTarget(int setting) {
@@ -70,6 +76,7 @@ public class BattleMenu : MonoBehaviour
                 randomIndex = Random.Range(0, battleFighters.Count);
                 currentTarget = battleFighters[randomIndex];
             }
+            CloseMenu();
         }
     }
 }

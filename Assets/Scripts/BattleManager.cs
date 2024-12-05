@@ -73,7 +73,7 @@ public class BattleManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (endBattle) battleState = 5;
+        if (endBattle && battleState < 5) battleState = 5;
         
         /*
         Once the battle has started, any initiation code will occur in state 0.
@@ -131,7 +131,7 @@ public class BattleManager : MonoBehaviour
                 } else if (winner == 1) {
                     battleDialogueBox.AddDialogue("AI wins!");
                 } else {
-                    battleDialogueBox.AddDialogue("Flee!");
+                    battleDialogueBox.AddDialogue("Fled successfully!");
                 }
                 CloseBattleScene();
                 break;
@@ -141,7 +141,7 @@ public class BattleManager : MonoBehaviour
     void InitUI() {
         int team0Index = 0;
         int team1Index = 0;
-        Vector3 spawnPositionOffset = new Vector3(-182, 40, 0); //this is the spawn position relative to ui border
+        Vector3 spawnPositionOffset = new Vector3(-300, 50, 0); //this is the spawn position relative to ui border
         foreach (BattleFighter fighter in battleFighters) {
             GameObject fighterUIDataObj = Instantiate(fighterUIDataPrefab, fighter.transform.position, Quaternion.identity);
             FighterUIData fighterUIData = fighterUIDataObj.GetComponent<FighterUIData>();
@@ -211,7 +211,7 @@ public class BattleManager : MonoBehaviour
                 randomTargetIndex = Random.Range(0, battleFighters.Count);
                 currentTarget = battleFighters[randomTargetIndex];
             }
-            battleDialogueBox.AddDialogue(currentActor.name + " used " + currentAttack.attackName + " on " + currentTarget.name);
+            battleDialogueBox.AddDialogue(currentActor.name + " used " + currentAttack.attackName + " on " + currentTarget.name + "!");
         } else {
             //Debug.Log(currentActor.name + " has no attacks available.");
         }
@@ -278,6 +278,7 @@ public class BattleManager : MonoBehaviour
     public void CloseBattleScene() {
         //Transfer fighter data
         //SceneManager.LoadScene(""); //Load the previous scene
+        Debug.Log("Close battle scene");
         battleState = 6; //temporary    
     }
 }

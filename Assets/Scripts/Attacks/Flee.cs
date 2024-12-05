@@ -16,7 +16,8 @@ public class Flee : Attack
                 battleManager.endBattle = true;
             }
         } else {
-            Debug.Log(attacker.name + " failed to flee!");
+            BattleDialogueBox battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
+            battleDialogueBox.AddDialogue("Failed to flee!");
         }
 
     }

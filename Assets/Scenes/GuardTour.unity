@@ -835,10 +835,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2176707377422472311, guid: 1b3c1e836f1db074e85ab7dfc98687a1, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 8cd0971058a195d4792515febc634c00, type: 2}
     - target: {fileID: 4214219413356340011, guid: 1b3c1e836f1db074e85ab7dfc98687a1, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 

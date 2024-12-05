@@ -5,28 +5,30 @@ public class PlayerSpawner : MonoBehaviour
     [Header("Configurations des positions de spawn")]
     [SerializeField] private SpawnConfiguration[] spawnConfigurations;
 
-    [Header("Position et orientation par défaut")]
+    [Header("Position et orientation par dï¿½faut")]
     [SerializeField] private Vector3 defaultSpawnPosition = Vector3.zero;
     [SerializeField] private float defaultSpawnRotationY = 0f;
 
     private void Start()
     {
-        if (GameManager.Instance.PreviousScene != null)
-        {
-            string previousScene = GameManager.Instance.PreviousScene;
-            foreach (var config in spawnConfigurations)
+        if (GameManager.Instance != null) {
+            if (GameManager.Instance.PreviousScene != null)
             {
-                if (config.sceneName == previousScene)
+                string previousScene = GameManager.Instance.PreviousScene;
+                foreach (var config in spawnConfigurations)
                 {
-                    // Applique la position et l'orientation configurées
-                    transform.position = config.spawnPosition;
-                    transform.rotation = Quaternion.Euler(0, config.spawnRotationY, 0);
-                    return;
+                    if (config.sceneName == previousScene)
+                    {
+                        // Applique la position et l'orientation configurï¿½es
+                        transform.position = config.spawnPosition;
+                        transform.rotation = Quaternion.Euler(0, config.spawnRotationY, 0);
+                        return;
+                    }
                 }
+            } else {
+                transform.position = defaultSpawnPosition;
+                transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
             }
-        } else {
-            transform.position = defaultSpawnPosition;
-            transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
         }
     }
 }
@@ -34,7 +36,7 @@ public class PlayerSpawner : MonoBehaviour
 [System.Serializable]
 public class SpawnConfiguration
 {
-    public string sceneName; // Nom de la scène précédente
-    public Vector3 spawnPosition; // Position de spawn pour cette scène
-    public float spawnRotationY; // Orientation Y (en degrés) du joueur
+    public string sceneName; // Nom de la scï¿½ne prï¿½cï¿½dente
+    public Vector3 spawnPosition; // Position de spawn pour cette scï¿½ne
+    public float spawnRotationY; // Orientation Y (en degrï¿½s) du joueur
 }

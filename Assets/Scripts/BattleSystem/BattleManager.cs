@@ -38,35 +38,7 @@ public class BattleManager : MonoBehaviour
         battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
         battleDialogueBox.AddDialogue("Battle start!");
 
-        //Initialize the fighter list
-        int team0Index = 0;
-        int team1Index = 0;
-        Vector3 baseSpawnPosition = new Vector3(3, 1, 0); //subsequent units will spawn at +-2.5 Z on the sides
-
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
-            battleFighters.Add(obj.GetComponent<BattleFighter>());
-            if (obj.GetComponent<BattleFighter>().team == 0) {
-                if (team0Index == 0) {
-                    obj.transform.position = baseSpawnPosition;
-                } else if (team0Index == 1) {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
-                } else {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
-                }
-                team0Index++;
-            }  else {
-                if (team1Index == 0) {
-                    obj.transform.position = baseSpawnPosition;
-                } else if (team1Index == 1) {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
-                } else {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
-                }
-                Vector3 position = obj.transform.position;
-                obj.transform.position = new Vector3(-position.x, position.y, position.z);
-                team1Index++;
-            }
-        }
+        //puts the fighters in the right positions
         //spawn the basic UI elements
         InitUI();
     }
@@ -160,6 +132,39 @@ public class BattleManager : MonoBehaviour
 
         //battleMenu initiation
         battleMenu.battleFighters = battleFighters;
+    }
+
+    public void InitFightersInBattle() {
+        //Initialize the fighter list
+        int team0Index = 0;
+        int team1Index = 0;
+        Vector3 baseSpawnPosition = new Vector3(3, 1, 0); //subsequent units will spawn at +-2.5 Z on the sides
+
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
+            battleFighters.Add(obj.GetComponent<BattleFighter>());
+            if (obj.GetComponent<BattleFighter>().team == 0) {
+                if (team0Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team0Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                team0Index++;
+            }  else {
+                obj.transform.rotation = Quaternion.Euler(0, 180, 0);
+                if (team1Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team1Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                Vector3 position = obj.transform.position;
+                obj.transform.position = new Vector3(-position.x, position.y, position.z);
+                team1Index++;
+            }
+        }
     }
 
     void ATBprogress() {

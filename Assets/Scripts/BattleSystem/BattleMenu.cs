@@ -72,10 +72,24 @@ public class BattleMenu : MonoBehaviour
             int randomIndex = Random.Range(0, battleFighters.Count);
             currentTarget = battleFighters[randomIndex];
 
-            while (!(setting == 3 || (setting == 0 && currentTarget.team == currentActor.team) || (setting == 1 && currentTarget.team != currentActor.team))) {
-                randomIndex = Random.Range(0, battleFighters.Count);
-                currentTarget = battleFighters[randomIndex];
+            bool foundEnemy = false;
+            foreach (BattleFighter fighter in battleFighters) {
+                if (fighter.team != currentActor.team) {
+                    foundEnemy = true;
+                    break;
+                }
             }
+
+            if (foundEnemy) {
+                while (!(setting == 3 || (setting == 0 && currentTarget.team == currentActor.team) || (setting == 1 && currentTarget.team != currentActor.team))) {
+                    randomIndex = Random.Range(0, battleFighters.Count);
+                    currentTarget = battleFighters[randomIndex];
+                }
+            } else {
+                //Didn't find a suitable target so hits itself
+                currentTarget = currentActor;
+            }
+            
             CloseMenu();
         }
     }

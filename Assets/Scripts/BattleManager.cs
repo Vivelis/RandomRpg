@@ -5,13 +5,15 @@ using UnityEngine;
 public class BattleManager : MonoBehaviour
 {
     int turn = 0; //this variable is used to determine whose turn it is
-    int battleState = 0; //this variable is used to determine the state of the battle
+    public int battleState = 0; //this variable is used to determine the state of the battle
     //0 = start of battle
     //1 = ATB in progress
     //2 = fighterAction selection
     //3 = fighterAction
     //4 = fighter state check
     //5 = end of battle
+    
+    public bool endBattle = false;
     public List<BattleFighter> battleFighters = new List<BattleFighter>(); //this is a list of all the fighters in the battle
     public AudioClip battleMusic; //music used during the battle
     int winner = -1; //the team that won
@@ -21,16 +23,21 @@ public class BattleManager : MonoBehaviour
     // UI ------------------------------------------------
     public Transform team0UIData; 
     public Transform team1UIData;
-
     public GameObject fighterUIDataPrefab;
+    public BattleMenu battleMenu;
+    public BattleDialogueBox battleDialogueBox;
     // ----------------------------------------------------
 
     BattleFighter currentActor;
     BattleFighter currentTarget;
     Attack currentAttack;
+    bool attackUIstarted = false;
 
     // Start is called before the first frame update
     void Start() {
+        battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
+        battleDialogueBox.AddDialogue("Battle start!");
+
         //Initialize the fighter list
         int team0Index = 0;
         int team1Index = 0;
@@ -60,14 +67,14 @@ public class BattleManager : MonoBehaviour
                 team1Index++;
             }
         }
-        Debug.Log("Battle Fighters: " + battleFighters.Count);
-
         //spawn the basic UI elements
         InitUI();
     }
 
     // Update is called once per frame
     void Update() {
+        if (endBattle) battleState = 5;
+        
         /*
         Once the battle has started, any initiation code will occur in state 0.
         After this is done, the battle will loop from state 1 to 4 until all fighters of one team are dead.
@@ -76,7 +83,7 @@ public class BattleManager : MonoBehaviour
         In state 3, the attack is executed, and effects are applied. The battle will then move to state 4.
         In state 4, the state of the fighters will be checked. Once that is done, if any team won the battle, the battle goes to state 5, otherwise, it goes back to state 1 and waits for the next full action bar.
         */
-
+        
         switch (battleState) {
             case 0:
                 //start of battle
@@ -96,8 +103,8 @@ public class BattleManager : MonoBehaviour
                 } else {
                     //AI turn
                     AIActionSelection(currentActor);
+                    battleState = 3;
                 }
-                battleState = 3;
                 break;
             case 3:
                 //fighterAction
@@ -118,14 +125,17 @@ public class BattleManager : MonoBehaviour
             case 5:
                 //end of battle
                 if (winner == 0) {
-                    Debug.Log("Player wins!");
+                    battleDialogueBox.AddDialogue("Player wins!");
                     //code to gain experience/rewards here
+                    //check each dead enemy and add their experience to the player
+                } else if (winner == 1) {
+                    battleDialogueBox.AddDialogue("AI wins!");
                 } else {
-                    Debug.Log("AI wins!");
+                    battleDialogueBox.AddDialogue("Flee!");
                 }
+                CloseBattleScene();
                 break;
         }
-        //Debug.Log("Battle State: " + battleState);
     }
 
     void InitUI() {
@@ -147,6 +157,9 @@ public class BattleManager : MonoBehaviour
                 team1Index++;
             }
         }
+
+        //battleMenu initiation
+        battleMenu.battleFighters = battleFighters;
     }
 
     void ATBprogress() {
@@ -198,19 +211,28 @@ public class BattleManager : MonoBehaviour
                 randomTargetIndex = Random.Range(0, battleFighters.Count);
                 currentTarget = battleFighters[randomTargetIndex];
             }
-
-            Debug.Log(currentActor.name + " selected attack: " + currentAttack.name + " on " + currentTarget.name);
+            battleDialogueBox.AddDialogue(currentActor.name + " used " + currentAttack.attackName + " on " + currentTarget.name);
         } else {
-            Debug.Log(currentActor.name + " has no attacks available.");
+            //Debug.Log(currentActor.name + " has no attacks available.");
         }
         battleState = 4;
     }
     
     void ActionSelection(BattleFighter currentActor) {
-        Debug.Log("Player turn: " + currentActor.name + " did something");
-        currentActor = null;
-        currentTarget = null;
-        currentAttack = null;
+        if (attackUIstarted == false) { //initiate the attack UI
+            currentTarget = null;
+            currentAttack = null;
+
+            battleMenu.OpenMenu(currentActor);
+            attackUIstarted = true;
+        } else { //wait for the player to select an action
+            if (battleMenu.currentAttack != null && battleMenu.currentTarget != null) {
+                currentAttack = battleMenu.currentAttack;
+                currentTarget = battleMenu.currentTarget;
+                battleState = 3;
+                attackUIstarted = false;
+            }
+        }
     }
 
     void ExecuteAction(BattleFighter currentActor, BattleFighter currentTarget, Attack currentAttack) {
@@ -241,6 +263,9 @@ public class BattleManager : MonoBehaviour
             }
         }
 
+        //update the menu
+        //battleMenu.battleFighters = battleFighters;
+
         if (team0Alive == false) {
             return 1;
         } else if (team1Alive == false) {
@@ -248,5 +273,11 @@ public class BattleManager : MonoBehaviour
         } else {
             return -1;
         }
+    }
+    
+    public void CloseBattleScene() {
+        //Transfer fighter data
+        //SceneManager.LoadScene(""); //Load the previous scene
+        battleState = 6; //temporary    
     }
 }

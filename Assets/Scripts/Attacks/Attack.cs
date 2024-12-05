@@ -9,6 +9,11 @@ public class Attack : MonoBehaviour
     public float magicScale;
     public int mpCost;
     public int accuracy;
+    public int targetSetting; //setting: 0 = ally, 1 = enemy, 2 = self, 3 = all
+    public BattleDialogueBox battleDialogueBox;
+
+    void start () {
+    }
 
     public virtual void AttackEffect(BattleFighter attacker, BattleFighter defender)
     {
@@ -41,14 +46,16 @@ public class Attack : MonoBehaviour
     public void InflictDamage(BattleFighter attacker, BattleFighter defender) {
         int damage = DamageCalculation(attacker, defender);
         defender.takeDamage(damage);
-        Debug.Log(attacker.name + " dealt " + damage + " damage to " + defender.name + "!");
+        battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
+        battleDialogueBox.AddDialogue(attacker.name + " dealt " + damage + " damage to " + defender.name + "!");
     }
 
     public bool PrecisionCheck(BattleFighter attacker, BattleFighter defender) {
         if (Random.Range(1, 101) <= accuracy) {
             return true;
         }
-        Debug.Log(attacker.name + " missed!");
+        battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
+        battleDialogueBox.AddDialogue(attacker.name + " missed!");
         return false;
     }
 }

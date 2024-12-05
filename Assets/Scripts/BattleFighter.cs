@@ -20,12 +20,17 @@ public class BattleFighter : MonoBehaviour
     public List<Attack> attacks = new List<Attack>(); //list of attacks
     public int status = 1; //1 = alive, 0 = dead
     public float atb = 0; //this is to track when the fighter will take its turn (see final fantasy ATB system for more detail)
+    public int level;
+    public int exp;
+    public int expToNextLevel;
+    public BattleDialogueBox battleDialogueBox;
 
     // Start is called before the first frame update
     void Start()
     {
         hp = maxHp;
         mp = maxMp;
+        battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
     }
 
     // Update is called once per frame
@@ -51,7 +56,28 @@ public class BattleFighter : MonoBehaviour
         if (hp <= 0) { //on death
             hp = 0;
             status = 0;
-            Debug.Log(name + " died.");
+            battleDialogueBox.AddDialogue(name + " died.");
         }
+    }
+
+    public void takeHealing(int healing) {
+        hp += healing;
+
+        if (hp > maxHp) {
+            hp = maxHp;
+        }
+    }
+
+    public void gainExp(int exp) {
+        this.exp += exp;
+        while (this.exp >= expToNextLevel) {
+            this.exp -= expToNextLevel;
+            levelUp();
+        }
+    }
+
+    public void levelUp() {
+        level += 1;
+        expToNextLevel = (int)Mathf.Round(expToNextLevel * 1.1f);
     }
 }

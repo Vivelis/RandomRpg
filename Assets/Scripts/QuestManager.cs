@@ -98,6 +98,18 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        if (9 <= int.Parse(currentQuestId))
+        {
+            GameObject gameObject = GameObject.Find("Particle System");
+            if (gameObject.activeSelf)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
     public void SetupPNJsInScene()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;

@@ -49,3 +49,6 @@ MonoBehaviour:
   magicScale: 1
   mpCost: 5
   accuracy: 90
+  targetSetting: 0
+  battleDialogueBox: {fileID: 0}
+  attackAnimNb: 2

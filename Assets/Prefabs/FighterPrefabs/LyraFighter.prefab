@@ -47,9 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 0
   name: Lyra
-  maxHp: 10
-  maxMp: 10
-  hp: 10
+  maxHp: 15
+  maxMp: 25
+  hp: 15
   mp: 10
   attack: 5
   defense: 5
@@ -64,6 +64,7 @@ MonoBehaviour:
   level: 1
   exp: 0
   expToNextLevel: 0
+  animator: {fileID: 0}
 --- !u!1001 &2254290217546528843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,7 +95,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 697065504524178788, guid: 3c80a092456db3f45a0221db0b9e6532, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.16
+      value: -0.008
       objectReference: {fileID: 0}
     - target: {fileID: 697065504524178788, guid: 3c80a092456db3f45a0221db0b9e6532, type: 3}
       propertyPath: m_LocalPosition.z

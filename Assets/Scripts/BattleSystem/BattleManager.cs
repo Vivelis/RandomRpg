@@ -38,7 +38,6 @@ public class BattleManager : MonoBehaviour
         battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
         battleDialogueBox.AddDialogue("Battle start!");
 
-        //puts the fighters in the right positions
         //spawn the basic UI elements
         InitUI();
     }
@@ -122,10 +121,10 @@ public class BattleManager : MonoBehaviour
             fighterUIData.fighter = fighter;
 
             if (fighter.team == 0) {
-                fighterUIDataObj.transform.position = team0UIData.position + spawnPositionOffset + new Vector3(0, team0Index * -40f, 0);
+                fighterUIDataObj.transform.position = team0UIData.position + spawnPositionOffset + new Vector3(0, team0Index * -50f, 0);
                 team0Index++;
             } else {
-                fighterUIDataObj.transform.position = team1UIData.position + spawnPositionOffset + new Vector3(0, team1Index * -40f, 0);
+                fighterUIDataObj.transform.position = team1UIData.position + spawnPositionOffset + new Vector3(0, team1Index * -50f, 0);
                 team1Index++;
             }
         }

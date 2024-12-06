@@ -25,6 +25,7 @@ public class BattleFighter : MonoBehaviour
     public int expToNextLevel;
     BattleDialogueBox battleDialogueBox;
     public Animator animator;
+    float animTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,17 @@ public class BattleFighter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animTimer += Time.deltaTime;
+
+        //refreshes the animator
+        if (animTimer > 1.5f) {
+            animator.SetBool("Attack1", false);
+            animator.SetBool("Attack2", false);
+            animator.SetBool("Attack3", false);
+            animator.SetBool("Attack4", false);
+            animator.SetBool("Boost1", false);
+            animator.SetBool("Boost2", false);
+        }
     }
 
     public bool callAttack(Attack attack, BattleFighter target) {
@@ -48,6 +60,7 @@ public class BattleFighter : MonoBehaviour
         }
 
         mp -= attack.mpCost;
+        setAttackAnim(attack);
         attack.AttackEffect(this, target);
         return true;
     }
@@ -59,6 +72,7 @@ public class BattleFighter : MonoBehaviour
             hp = 0;
             status = 0;
             battleDialogueBox.AddDialogue(name + " died.");
+            animator.SetBool("Dead", true);
         }
     }
 
@@ -81,5 +95,24 @@ public class BattleFighter : MonoBehaviour
     public void levelUp() {
         level += 1;
         expToNextLevel = (int)Mathf.Round(expToNextLevel * 1.1f);
+    }
+
+    public void setAttackAnim(Attack attack) {
+        int ind = attack.attackAnimNb;
+
+        animator.SetBool("Attack1", false);
+        animator.SetBool("Attack2", false);
+        animator.SetBool("Attack3", false);
+        animator.SetBool("Attack4", false);
+        animator.SetBool("Boost1", false);
+        animator.SetBool("Boost2", false);
+
+        if (ind < 4 && ind > 0) {
+            animator.SetBool("Attack" + ind, true);
+        } else {
+            animator.SetBool("Boost" + (ind - 3), true);
+        }
+
+        animTimer = 0f;
     }
 }

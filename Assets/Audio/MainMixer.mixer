@@ -85,7 +85,7 @@ AudioMixerController:
   - guid: f5519b481aa84c147a3d9d11f621f8b1
     name: FxVolume
   - guid: eb90fc457fed4d64883154fbcf77b736
-    name: OverallVolume
+    name: MasterVolume
   - guid: ffeb5630128bf0d4299f31b6a308091d
     name: MusicVolume
   m_AudioMixerGroupViews:

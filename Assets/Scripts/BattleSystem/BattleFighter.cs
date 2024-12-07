@@ -95,6 +95,17 @@ public class BattleFighter : MonoBehaviour
     public void levelUp() {
         level += 1;
         expToNextLevel = (int)Mathf.Round(expToNextLevel * 1.1f);
+        //upgrade stats here
+        maxHp += 1;
+        maxMp += 1;
+        hp += 1;
+        mp += 1;
+        attack += 1;
+        defense += 1;
+        magic += 1;
+        magicDefense += 1;
+        speed += 1;
+        accuracy += 1;
     }
 
     public void setAttackAnim(Attack attack) {

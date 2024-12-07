@@ -60,13 +60,13 @@ MonoBehaviour:
   speed: 3
   accuracy: 5
   attacks:
-  - {fileID: 0}
+  - {fileID: 2815212803751204278, guid: a5356b3ec88952a4d85885984048a1c8, type: 3}
   status: 1
   atb: 0
   level: 1
   exp: 0
   expToNextLevel: 0
-  animator: {fileID: 0}
+  animator: {fileID: 4157636305453494182, guid: a06fa90e23edf614bba69c1c88dc92cc, type: 3}
 --- !u!136 &-236715300294694298
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7897478291035987650, guid: a06fa90e23edf614bba69c1c88dc92cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.445
       objectReference: {fileID: 0}
     - target: {fileID: 7897478291035987650, guid: a06fa90e23edf614bba69c1c88dc92cc, type: 3}
       propertyPath: m_LocalPosition.z

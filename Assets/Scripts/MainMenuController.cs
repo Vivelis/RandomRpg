@@ -76,14 +76,18 @@ public class MainMenuController : MonoBehaviour
 
     public void OnNewGameButtonPressed()
     {
+        _dataPersistenceManager.enabled = true;
+        _dataPersistenceManager.NewGame();
         SceneManager.LoadScene(_newGameLevel);
     }
 
     public void OnLoadGameButtonPressed()
     {
-        if (PlayerPrefs.HasKey("SavedLevel"))
+        _dataPersistenceManager.enabled = true;
+        _dataPersistenceManager.LoadGame();
+        if (_dataPersistenceManager.HasGameData())
         {
-            levelToLoad = PlayerPrefs.GetString("SavedLevel");
+            levelToLoad = _dataPersistenceManager.GetGameData().currentScene;
             SceneManager.LoadScene(levelToLoad);
         }
         else

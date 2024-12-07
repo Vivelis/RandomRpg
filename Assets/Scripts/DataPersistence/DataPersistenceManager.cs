@@ -34,7 +34,7 @@ public class DataPersistenceManager : MonoBehaviour
         gameData = new GameData();
     }
 
-    public void LoadGame()
+    public bool LoadGame()
     {
         this.gameData = dataHandler.Load();
 
@@ -45,12 +45,13 @@ public class DataPersistenceManager : MonoBehaviour
         if (this.gameData == null)
         {
             Debug.LogWarning("No game data found.");
-            return;
+            return false;
         }
         foreach (IDataPersistence dataPersistenceObject in dataPersistenceObjects)
         {
             dataPersistenceObject.LoadData(gameData);
         }
+        return true;
     }
 
     public void SaveGame()
@@ -104,5 +105,10 @@ public class DataPersistenceManager : MonoBehaviour
     public bool HasGameData()
     {
         return gameData != null;
+    }
+
+    public GameData GetGameData()
+    {
+        return gameData;
     }
 }

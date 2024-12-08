@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Assertions;
+using UnityEngine.Audio;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -20,10 +21,20 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject GameTitle = null;
     [SerializeField] private GameObject SettingsPanel = null;
 
-    [Header("Volume Settings")]
-    [SerializeField] private Slider volumeSlider = null;
-    [SerializeField] private TMP_Text volumeValueText = null;
+    [Header("Audio Settings")]
     [SerializeField] private float defaultVolume = 0.5f;
+    [SerializeField] private Slider mainVolumeSlider = null;
+    [SerializeField] private TMP_Text mainVolumeValueText = null;
+    [SerializeField] private Slider fxMenuVolumeSlider = null;
+    [SerializeField] private TMP_Text fxMenuVolumeValueText = null;
+    [SerializeField] private Slider fxGameVolumeSlider = null;
+    [SerializeField] private TMP_Text fxGameVolumeValueText = null;
+    [SerializeField] private Slider musicVolumeSlider = null;
+    [SerializeField] private TMP_Text musicVolumeValueText = null;
+    [SerializeField] private AudioMixer mainAudioMixer = null;
+    [SerializeField] private AudioMixer fxMenuAudioMixer = null;
+    [SerializeField] private AudioMixer fxGameAudioMixer = null;
+    [SerializeField] private AudioMixer musicAudioMixer = null;
 
     [Header("Gameplay Settings")]
     [SerializeField] private Slider controllerSensitivitySlider = null;
@@ -115,10 +126,56 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
-    public void OnVolumeSliderValueChanged(float volume)
+    public void OnMainVolumeSliderValueChanged(float volume)
     {
-        AudioListener.volume = volume;
-        volumeValueText.text = (volume * 100).ToString("0");
+        if (volume == 0)
+        {
+            mainAudioMixer.SetFloat("MasterVolume", -80);
+        }
+        else
+        {
+            mainAudioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20 + 1);
+        }
+        mainVolumeValueText.text = (volume * 100).ToString("0");
+    }
+
+    public void OnFxMenuVolumeSliderValueChanged(float volume)
+    {
+        if (volume == 0)
+        {
+            fxMenuAudioMixer.SetFloat("MasterVolume", -80);
+        }
+        else
+        {
+            fxMenuAudioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+        }
+        fxMenuVolumeValueText.text = (volume * 100).ToString("0");
+    }
+
+    public void OnFxGameVolumeSliderValueChanged(float volume)
+    {
+        if (volume == 0)
+        {
+            fxGameAudioMixer.SetFloat("MasterVolume", -80);
+        }
+        else
+        {
+            fxGameAudioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+        }
+        fxGameVolumeValueText.text = (volume * 100).ToString("0");
+    }
+
+    public void OnMusicVolumeSliderValueChanged(float volume)
+    {
+        if (volume == 0)
+        {
+            musicAudioMixer.SetFloat("MasterVolume", -80);
+        }
+        else
+        {
+            musicAudioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+        }
+        musicVolumeValueText.text = (volume * 100).ToString("0");
     }
 
     public void OnApplyVolumeButtonPressed()
@@ -128,7 +185,10 @@ public class MainMenuController : MonoBehaviour
 
     public void ApplyVolume()
     {
-        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
+        PlayerPrefs.SetFloat("mainVolume", mainVolumeSlider.value);
+        PlayerPrefs.SetFloat("fxMenuVolume", fxMenuVolumeSlider.value);
+        PlayerPrefs.SetFloat("fxGameVolume", fxGameVolumeSlider.value);
+        PlayerPrefs.SetFloat("musicVolume", musicVolumeSlider.value);
         StartCoroutine(ConfirmationBox());
     }
 
@@ -159,9 +219,14 @@ public class MainMenuController : MonoBehaviour
 
     public void OnResetVolumeButtonPressed()
     {
-        volumeSlider.value = defaultVolume;
-        AudioListener.volume = defaultVolume;
-        volumeValueText.text = (defaultVolume * 100).ToString("0");
+        mainVolumeSlider.value = defaultVolume;
+        fxMenuVolumeSlider.value = defaultVolume;
+        fxGameVolumeSlider.value = defaultVolume;
+        musicVolumeSlider.value = defaultVolume;
+        OnMainVolumeSliderValueChanged(defaultVolume);
+        OnFxMenuVolumeSliderValueChanged(defaultVolume);
+        OnFxGameVolumeSliderValueChanged(defaultVolume);
+        OnMusicVolumeSliderValueChanged(defaultVolume);
         ApplyVolume();
     }
 

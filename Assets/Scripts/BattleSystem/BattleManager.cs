@@ -33,40 +33,15 @@ public class BattleManager : MonoBehaviour
     Attack currentAttack;
     bool attackUIstarted = false;
 
+    public GameObject skeletonPrefab;
+
     // Start is called before the first frame update
     void Start() {
         battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
         battleDialogueBox.AddDialogue("Battle start!");
 
-        //Initialize the fighter list
-        int team0Index = 0;
-        int team1Index = 0;
-        Vector3 baseSpawnPosition = new Vector3(3, 1, 0); //subsequent units will spawn at +-2.5 Z on the sides
-
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
-            battleFighters.Add(obj.GetComponent<BattleFighter>());
-            if (obj.GetComponent<BattleFighter>().team == 0) {
-                if (team0Index == 0) {
-                    obj.transform.position = baseSpawnPosition;
-                } else if (team0Index == 1) {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
-                } else {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
-                }
-                team0Index++;
-            }  else {
-                if (team1Index == 0) {
-                    obj.transform.position = baseSpawnPosition;
-                } else if (team1Index == 1) {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
-                } else {
-                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
-                }
-                Vector3 position = obj.transform.position;
-                obj.transform.position = new Vector3(-position.x, position.y, position.z);
-                team1Index++;
-            }
-        }
+        InitEnemies();
+        InitFightersInBattle();
         //spawn the basic UI elements
         InitUI();
     }
@@ -150,16 +125,109 @@ public class BattleManager : MonoBehaviour
             fighterUIData.fighter = fighter;
 
             if (fighter.team == 0) {
-                fighterUIDataObj.transform.position = team0UIData.position + spawnPositionOffset + new Vector3(0, team0Index * -40f, 0);
+                fighterUIDataObj.transform.position = team0UIData.position + spawnPositionOffset + new Vector3(0, team0Index * -50f, 0);
                 team0Index++;
             } else {
-                fighterUIDataObj.transform.position = team1UIData.position + spawnPositionOffset + new Vector3(0, team1Index * -40f, 0);
+                fighterUIDataObj.transform.position = team1UIData.position + spawnPositionOffset + new Vector3(0, team1Index * -50f, 0);
                 team1Index++;
             }
         }
 
         //battleMenu initiation
         battleMenu.battleFighters = battleFighters;
+    }
+
+    void InitEnemies() {
+        //randomly spawns enemies
+        int numberOfSkeletons = Random.Range(1, 4); // Generate a random number of skeletons between 1 and 4.
+        for (int i = 0; i < numberOfSkeletons; i++) {
+            GameObject skeleton = Instantiate(skeletonPrefab);
+            BattleFighter bf = skeleton.GetComponent<BattleFighter>();
+            bf.team = 1;
+            bf.speed = Random.Range(bf.speed - 1, bf.speed + 2);
+
+            if (bf.speed <= 0) {
+                bf.speed = 1;
+            }
+            //battleFighters.Add(bf);
+        }
+    }
+
+    public void InitFightersInBattle() {
+        //Initialize the fighter list
+        int team0Index = 0;
+        int team1Index = 0;
+        Vector3 baseSpawnPosition = new Vector3(3, 1, 0); //subsequent units will spawn at +-2.5 Z on the sides
+
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
+            BattleFighter bf = obj.GetComponent<BattleFighter>();
+            battleFighters.Add(bf);
+            bf.animator.SetBool("Fight", true);
+            if (bf.team == 0) {
+                if (team0Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team0Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                team0Index++;
+            }  else {
+                obj.transform.rotation = Quaternion.Euler(0, 180, 0);
+                if (team1Index == 0) {
+                    obj.transform.position = baseSpawnPosition;
+                } else if (team1Index == 1) {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, 2.5f);
+                } else {
+                    obj.transform.position = baseSpawnPosition + new Vector3(0, 0, -2.5f);
+                }
+                Vector3 position = obj.transform.position;
+                obj.transform.position = new Vector3(-position.x, position.y, position.z);
+                team1Index++;
+            }
+        }
+
+        InitParty();
+    }
+
+    //sets the stats of the party
+    public void InitParty() {
+        if (BattleData.Instance == null) {
+            Debug.Log("BattleData not found or null");
+            return;
+        }
+        Debug.Log("Init party");
+        //for testing:
+        BattleData.Instance.TestSave();
+
+        foreach (BattleFighter fighter in battleFighters) {
+            if (fighter.team == 0) {
+                FighterSave fSave = null;
+                if (fighter.name == "Lyra") {
+                    fSave = BattleData.Instance.GetFighterSave("Lyra");
+                } else if (fighter.name == "Compagnon") {
+                    fSave = BattleData.Instance.GetFighterSave("Compagnon");
+                }
+
+                if (fSave != null) {
+                    fighter.level = fSave.level;
+                    fighter.exp = fSave.exp;
+                    fighter.expToNextLevel = fSave.expToNextLevel;
+                    fighter.maxHp = fSave.maxHp;
+                    fighter.hp = fSave.hp;
+                    fighter.maxMp = fSave.maxMp;
+                    fighter.mp = fSave.mp;
+                    fighter.attack = fSave.attack;
+                    fighter.defense = fSave.defense;
+                    fighter.magic = fSave.magic;
+                    fighter.magicDefense = fSave.magicDefense;
+                    fighter.speed = fSave.speed;
+                    fighter.accuracy = fSave.accuracy;
+
+                    Debug.Log("Loaded fighter: " + fighter.name);
+                }
+            }
+        }
     }
 
     void ATBprogress() {
@@ -201,11 +269,16 @@ public class BattleManager : MonoBehaviour
 
     void AIActionSelection(BattleFighter currentActor) {
         if (currentActor.attacks.Count > 0) {
+
             int randomIndex = Random.Range(0, currentActor.attacks.Count);
             currentAttack = currentActor.attacks[randomIndex];
+            if (currentAttack == null) {
+                Debug.Log("currentAttack is null, list is empty!");
+            }
+
             int randomTargetIndex = Random.Range(0, battleFighters.Count);
             currentTarget = battleFighters[randomTargetIndex];
-            
+
             //prevents attacks on allies
             while (currentTarget.team == currentActor.team && TurnCheck() == -1) {
                 randomTargetIndex = Random.Range(0, battleFighters.Count);
@@ -275,6 +348,21 @@ public class BattleManager : MonoBehaviour
         }
     }
     
+    void GainExp() {
+        int totalExp = 0;
+        foreach (BattleFighter fighter in battleFighters) {
+            if (fighter.team == 1) {
+                totalExp += fighter.level * 10;
+            }
+        }
+
+        foreach (BattleFighter fighter in battleFighters) {
+            if (fighter.team == 0) {
+                fighter.gainExp(totalExp);
+            }
+        }
+    }
+
     public void CloseBattleScene() {
         //Transfer fighter data
         //SceneManager.LoadScene(""); //Load the previous scene

@@ -51,3 +51,4 @@ MonoBehaviour:
   accuracy: 70
   targetSetting: 1
   battleDialogueBox: {fileID: 0}
+  attackAnimNb: 1

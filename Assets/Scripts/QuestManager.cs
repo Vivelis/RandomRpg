@@ -3,7 +3,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : MonoBehaviour, IDataPersistence
 {
     public static QuestManager instance;
 
@@ -23,6 +23,16 @@ public class QuestManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        currentQuestId = data.currentQuestId;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.currentQuestId = currentQuestId;
     }
 
     private void LoadQuestData()
@@ -45,12 +55,12 @@ public class QuestManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Erreur : les données JSON sont nulles ou vides après la désérialisation.");
+                    Debug.LogError("Erreur : les donnï¿½es JSON sont nulles ou vides aprï¿½s la dï¿½sï¿½rialisation.");
                 }
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"Erreur lors de la désérialisation du JSON : {ex.Message}");
+                Debug.LogError($"Erreur lors de la dï¿½sï¿½rialisation du JSON : {ex.Message}");
             }
         }
         else
@@ -89,7 +99,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Erreur lors du chargement des données de sauvegarde.");
+                Debug.LogError("Erreur lors du chargement des donnï¿½es de sauvegarde.");
             }
         }
         else
@@ -129,7 +139,7 @@ public class QuestManager : MonoBehaviour
                             if (pnjStatus.pnjName == "Compagnon" && pnjStatus.active == true && obj.name == "Compagnon" && obj.scene == SceneManager.GetActiveScene())
                             {
                                 obj.SetActive(true);
-                            } else if (pnjStatus.pnjName == "Roi démon" && pnjStatus.active == true && obj.name == "Roi démon" && obj.scene == SceneManager.GetActiveScene())
+                            } else if (pnjStatus.pnjName == "Roi dï¿½mon" && pnjStatus.active == true && obj.name == "Roi dï¿½mon" && obj.scene == SceneManager.GetActiveScene())
                             {
                                 obj.SetActive(true);
                             }
@@ -149,17 +159,17 @@ public class QuestManager : MonoBehaviour
                         }
                         else
                         {
-                            Debug.LogWarning($"PNJ {pnjStatus.pnjName} introuvable dans la scène {currentSceneName}.");
+                            Debug.LogWarning($"PNJ {pnjStatus.pnjName} introuvable dans la scï¿½ne {currentSceneName}.");
                         }
                     }
                     return;
                 }
             }
-            Debug.LogWarning($"Aucune donnée trouvée pour la scène : {currentSceneName} dans la quête ID {currentQuestId}.");
+            Debug.LogWarning($"Aucune donnï¿½e trouvï¿½e pour la scï¿½ne : {currentSceneName} dans la quï¿½te ID {currentQuestId}.");
         }
         else
         {
-            Debug.LogWarning($"Données de quête introuvables ou inexistantes pour l'ID {currentQuestId}.");
+            Debug.LogWarning($"Donnï¿½es de quï¿½te introuvables ou inexistantes pour l'ID {currentQuestId}.");
         }
     }
 

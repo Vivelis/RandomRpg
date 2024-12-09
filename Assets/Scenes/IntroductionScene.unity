@@ -551,8 +551,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Mais chaque pas te rapprochera d\u2019une v\xE9rit\xE9 bien plus grande
-    que toi. Oses-tu affronter les t\xE9n\xE8bres pour sauver Everfrost ?"
+  m_text: But every step will bring you closer to a truth far greater than yourself.
+    Do you dare to face the darkness to save Everfrost?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -823,10 +823,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Mais cette paix est menac\xE9e. Les cr\xE9atures des terres sauvages sont
-    devenues agressives, et des villageois disparaissent myst\xE9rieusement. Des murmures
-    d\u2019une puissance ancienne se r\xE9pandent, et les \xE9toiles elles-m\xEAmes
-    semblent annoncer un malheur imminent."
+  m_text: But this peace is threatened. The creatures of the wilds have become aggressive,
+    and villagers are mysteriously disappearing. Whispers of an ancient power are
+    spreading, and the stars themselves seem to foretell impending doom.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -911,108 +910,87 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 1541728956969658105, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3178642320051033750, guid: f97d61d8a3c741a4cbd1a678e83ae70d,
-        type: 3}
+    - target: {fileID: 3178642320051033750, guid: f97d61d8a3c741a4cbd1a678e83ae70d, type: 3}
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
@@ -1211,9 +1189,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lors d\u2019une nuit o\xF9 le ciel s\u2019est embras\xE9 d\u2019\xE9tranges
-    aurores, tu as d\xE9couvert une v\xE9rit\xE9 effrayante : le Roi D\xE9mon, une
-    force scell\xE9e sous la glace depuis des si\xE8cles, est en train de s\u2019\xE9veiller."
+  m_text: 'On a night when the sky was ablaze with strange auroras, you discovered
+    a frightening truth: the Demon King, a force sealed beneath the ice for centuries,
+    is awakening.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1347,9 +1325,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Les Montagnes d\u2019Everfrost, un monde fig\xE9 dans la glace o\xF9 la
-    magie et la nature coexistent en harmonie. Ici, dans le village recul\xE9 de Glacivale,
-    les habitants vivent prot\xE9g\xE9s du danger par des enchantements anciens."
+  m_text: The Everfrost Mountains, a world frozen in ice where magic and nature coexist
+    in harmony. Here, in the remote village of Glacivale, the inhabitants live protected
+    from danger by ancient enchantments.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1551,9 +1529,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Toi, Lyra, jeune apprentie magicienne, as grandi au c\u0153ur de ces montagnes,
-    berc\xE9e par les r\xE9cits d\u2019anciennes batailles contre le mal. Mais ces
-    l\xE9gendes deviennent r\xE9alit\xE9."
+  m_text: You, Lyra, a young apprentice magician, grew up in the heart of these mountains,
+    lulled by tales of ancient battles against evil. But these legends are becoming
+    reality.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1687,9 +1665,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Arm\xE9e de ta magie naissante et d\u2019un courage encore fragile, tu
-    te lances dans une qu\xEAte p\xE9rilleuse pour comprendre ce qui s\u2019est bris\xE9
-    dans ce monde\u2026 et pour prot\xE9ger ceux que tu aimes."
+  m_text: Armed with your nascent magic and a still fragile courage, you embark on
+    a perilous quest to understand what has broken in this world... and to protect
+    those you love.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1792,8 +1770,7 @@ AudioSource:
   m_GameObject: {fileID: 1903346119}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 5af40dbee470b1e41947b05bb720021c,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 5af40dbee470b1e41947b05bb720021c, type: 2}
   m_audioClip: {fileID: 8300000, guid: b82b0d87309722341a8926c780d9426d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

@@ -131,7 +131,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 2
+              "dialogueState": 1
             },
             {
               "pnjName": "Chef_village",
@@ -192,7 +192,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 2
+              "dialogueState": 1
             },
             {
               "pnjName": "Chef_village",
@@ -253,7 +253,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 2
+              "dialogueState": 1
             },
             {
               "pnjName": "Chef_village",
@@ -314,7 +314,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 3
+              "dialogueState": 2
             },
             {
               "pnjName": "Chef_village",
@@ -375,7 +375,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 3
+              "dialogueState": 2
             },
             {
               "pnjName": "Chef_village",
@@ -436,7 +436,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 3
+              "dialogueState": 2
             },
             {
               "pnjName": "Chef_village",
@@ -497,7 +497,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 3
+              "dialogueState": 2
             },
             {
               "pnjName": "Chef_village",
@@ -558,7 +558,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 3
+              "dialogueState": 2
             },
             {
               "pnjName": "Chef_village",
@@ -619,7 +619,7 @@
             {
               "pnjName": "Garde",
               "active": true,
-              "dialogueState": 3
+              "dialogueState": 2
             },
             {
               "pnjName": "Chef_village",

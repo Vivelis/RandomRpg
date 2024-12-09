@@ -15,6 +15,7 @@ public class BattleMenu : MonoBehaviour
     public Attack currentAttack = null;
     public BattleFighter currentTarget = null;
     public Attack baseAttack;
+    public Attack fireballAttack;
     public Attack FleeAttack;
 
     //-Menus---------------------------------------
@@ -52,6 +53,13 @@ public class BattleMenu : MonoBehaviour
     public void SelectBaseAttack() {
         Debug.Log("Selected base attack");
         currentAttack = baseAttack;
+        SelectTarget(currentAttack.targetSetting);
+    }
+
+    public void SelectFireBall() {
+        if (currentActor.name == "Compagnon") return;
+        Debug.Log("Selected fireball");
+        currentAttack = fireballAttack;
         SelectTarget(currentAttack.targetSetting);
     }
 

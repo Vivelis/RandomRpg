@@ -161,7 +161,17 @@ public class BattleManager : MonoBehaviour
 
         foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
             BattleFighter bf = obj.GetComponent<BattleFighter>();
-            battleFighters.Add(bf);
+            if (bf.name == "Compagnon" && BattleData.Instance != null && BattleData.Instance.compagnonState != 2) {
+                if (BattleData.Instance.compagnonState == 0) {
+                    obj.SetActive(false);
+                } else if (BattleData.Instance.compagnonState == 1) {
+                    bf.team = 1;
+                    battleFighters.Add(bf);
+                }
+            } else {
+                battleFighters.Add(bf);
+            }
+
             bf.animator.SetBool("Fight", true);
             if (bf.team == 0) {
                 if (team0Index == 0) {
@@ -201,6 +211,7 @@ public class BattleManager : MonoBehaviour
         BattleData.Instance.TestSave();
 
         foreach (BattleFighter fighter in battleFighters) {
+            Debug.Log("testing fighter " + fighter.name);
             if (fighter.team == 0) {
                 FighterSave fSave = null;
                 if (fighter.name == "Lyra") {
@@ -210,6 +221,7 @@ public class BattleManager : MonoBehaviour
                 }
 
                 if (fSave != null) {
+                    fighter.name = fSave.name;
                     fighter.level = fSave.level;
                     fighter.exp = fSave.exp;
                     fighter.expToNextLevel = fSave.expToNextLevel;
@@ -367,6 +379,20 @@ public class BattleManager : MonoBehaviour
         //Transfer fighter data
         //SceneManager.LoadScene(""); //Load the previous scene
         Debug.Log("Close battle scene");
-        battleState = 6; //temporary    
+        
+        if (BattleData.Instance != null) {
+            BattleFighter Lyra = battleFighters.Find(fighter => fighter.name == "Lyra");
+            if (Lyra != null) {
+                BattleData.Instance.SetPartyMemberState(Lyra);
+            }
+
+            if (BattleData.Instance.compagnonState == 2) {
+                BattleData.Instance.SetPartyMemberState(battleFighters.Find(fighter => fighter.name == "Compagnon"));
+            }
+        }
+
+        Debug.Log("Previous scene: " + BattleData.Instance.previousScene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(BattleData.Instance.previousScene);
+        battleState = 6; //temporary
     }
 }

@@ -7,6 +7,14 @@ public class BattleData : MonoBehaviour
 
     private List<string> enemyNames = new List<string>();
     private List<FighterSave> fighterSaves = new List<FighterSave>();
+    public int compagnonState = 0;
+    //0 not found
+    //1 enemy
+    //2 party
+
+    public string previousScene;
+    public Vector3 previousPosition;
+    public Quaternion previousCameraRotation;
 
     private void Awake()
     {
@@ -88,6 +96,26 @@ public class BattleData : MonoBehaviour
         Compagnon.accuracy = 5;
 
         fighterSaves.Add(Compagnon);
+    }
+
+    public void SetPartyMemberState(BattleFighter fighter) {
+        foreach (FighterSave save in fighterSaves) {
+            if (save.name == fighter.name) {
+                save.level = fighter.level;
+                save.exp = fighter.exp;
+                save.expToNextLevel = fighter.expToNextLevel;
+                save.maxHp = fighter.maxHp;
+                save.hp = fighter.hp;
+                save.maxMp = fighter.maxMp;
+                save.mp = fighter.mp;
+                save.attack = fighter.attack;
+                save.defense = fighter.defense;
+                save.magic = fighter.magic;
+                save.magicDefense = fighter.magicDefense;
+                save.speed = fighter.speed;
+                save.accuracy = fighter.accuracy;
+            }
+        }
     }
 
     //heals the party to full health

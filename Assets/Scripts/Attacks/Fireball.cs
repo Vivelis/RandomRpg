@@ -8,8 +8,9 @@ public class Fireball : Attack
     }
 
     public override void AttackEffect(BattleFighter attacker, BattleFighter defender) {
+
         if (!PrecisionCheck(attacker, defender)) {
-            return;    
+            return;
         }
         InflictDamage(attacker, defender);      
     }

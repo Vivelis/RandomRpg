@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System.IO;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     public static QuestManager instance;
 
     public Dictionary<string, QuestStateData> questData;
+    public UnityEvent onQuestStateChange = new UnityEvent();
     private string currentQuestId = "1";
 
     private void Awake()
@@ -25,9 +27,15 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    public string GetCurrentQuestId()
+    {
+        return currentQuestId;
+    }
+
     public void LoadData(GameData data)
     {
         currentQuestId = data.currentQuestId;
+        onQuestStateChange.Invoke();
     }
 
     public void SaveData(ref GameData data)
@@ -177,6 +185,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     {
         int nextQuestId = int.Parse(currentQuestId) + 1;
         currentQuestId = nextQuestId.ToString();
+        onQuestStateChange.Invoke();
         SetupPNJsInScene();
     }
 }

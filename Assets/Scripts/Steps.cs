@@ -26,7 +26,6 @@ public class Steps : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => characterController.velocity.magnitude > minimumVelocity);
-            Debug.Log(characterController.velocity.magnitude);
             PlayRandomSteps();
             yield return new WaitForSeconds(timeBetweenSteps);
         }

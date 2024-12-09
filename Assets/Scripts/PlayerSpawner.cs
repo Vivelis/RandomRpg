@@ -19,6 +19,7 @@ public class PlayerSpawner : MonoBehaviour
                 {
                     if (config.sceneName == previousScene)
                     {
+                        Debug.Log("Position de spawn configur�e pour la sc�ne " + previousScene);
                         // Applique la position et l'orientation configur�es
                         transform.position = config.spawnPosition;
                         transform.rotation = Quaternion.Euler(0, config.spawnRotationY, 0);
@@ -26,8 +27,12 @@ public class PlayerSpawner : MonoBehaviour
                     }
                 }
             } else {
-                transform.position = defaultSpawnPosition;
-                transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
+                if (!(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "BattleSystem")) {
+                    transform.position = defaultSpawnPosition;
+                    transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
+                } else {
+                    GetComponent<BasicController>().canMove = false;                    
+                }
             }
         }
     }

@@ -1868,10 +1868,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5febda6b8e960fe4b8d002172bb242ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleSceneName: 
+  battleSceneName: BattleSystem
   minEnemies: 1
   maxEnemies: 3
-  possibleEnemies: []
+  possibleEnemies:
+  - {fileID: 6525239146696520869, guid: 00ef3f2c01bbaa040bac6372ccbf87b4, type: 3}
   encounterChance: 0.2
   checkInterval: 1
 --- !u!64 &375447518

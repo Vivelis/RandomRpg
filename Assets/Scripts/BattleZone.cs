@@ -5,7 +5,7 @@ using System.Collections;
 
 public class BattleZone : MonoBehaviour
 {
-    [Header("Paramètres de la zone de combat")]
+    [Header("Paramï¿½tres de la zone de combat")]
     [SerializeField] private string battleSceneName;
     [SerializeField] private int minEnemies = 1;
     [SerializeField] private int maxEnemies = 3;
@@ -13,7 +13,22 @@ public class BattleZone : MonoBehaviour
     [SerializeField] private float encounterChance = 0.5f;
     [SerializeField] private float checkInterval = 1.0f;
 
+    private float elapsedTime = 0.0f;
+
     private bool isPlayerInZone = false;
+
+    void FixedUpdate()
+    {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= checkInterval)
+        {
+            Debug.Log("Verif combat");
+            if (Random.value < encounterChance) {
+                StartBattle();
+            }
+            elapsedTime = 0.0f;
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -38,9 +53,12 @@ public class BattleZone : MonoBehaviour
     {
         while (isPlayerInZone)
         {
-            yield return new WaitForSeconds(checkInterval);
+            //yield return new WaitForSeconds(checkInterval);
+            if (elapsedTime < checkInterval) {
+                yield return null;
+            }
 
-            Debug.Log("Vérification d'un combat...");
+            Debug.Log("Vï¿½rification d'un combat...");
             if (Random.value < encounterChance)
             {
                 StartBattle();
@@ -53,22 +71,31 @@ public class BattleZone : MonoBehaviour
     {
         if (string.IsNullOrEmpty(battleSceneName))
         {
-            Debug.LogWarning("Aucune scène de combat définie !");
+            Debug.LogWarning("Aucune scï¿½ne de combat dï¿½finie !");
             return;
         }
 
         int enemyCount = Random.Range(minEnemies, maxEnemies + 1);
         List<string> selectedEnemies = new List<string>();
 
-        Debug.Log("Génération des ennemis...");
+        Debug.Log("Gï¿½nï¿½ration des ennemis...");
         for (int i = 0; i < enemyCount; i++)
         {
             int randomIndex = Random.Range(0, possibleEnemies.Count);
             selectedEnemies.Add(possibleEnemies[randomIndex].name);
         }
 
+        if (BattleData.Instance == null) {
+            BattleData.Instance = new BattleData();
+            BattleData.Instance.TestSave();
+        }
         BattleData.Instance.SetBattleData(selectedEnemies);
+        BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
+        BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
+        //set the compagnon
 
+        Debug.Log("Lancement du combat...");
         SceneManager.LoadScene(battleSceneName);
     }
 }

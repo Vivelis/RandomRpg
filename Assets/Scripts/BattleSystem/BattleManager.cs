@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
     //3 = fighterAction
     //4 = fighter state check
     //5 = end of battle
+    //6 = close battle scene
     
     public bool endBattle = false;
     public List<BattleFighter> battleFighters = new List<BattleFighter>(); //this is a list of all the fighters in the battle
@@ -34,6 +35,7 @@ public class BattleManager : MonoBehaviour
     bool attackUIstarted = false;
 
     public GameObject skeletonPrefab;
+    public GameObject bossPrefab;
 
     // Start is called before the first frame update
     void Start() {
@@ -110,6 +112,12 @@ public class BattleManager : MonoBehaviour
                 }
                 CloseBattleScene();
                 break;
+            case 6:
+                if (battleDialogueBox != null && battleDialogueBox.currentDialogueList.Count == 0 && battleDialogueBox.currentRemainingDialogue == "") {
+                    Debug.Log("Previous scene: " + BattleData.Instance.previousScene);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(BattleData.Instance.previousScene);
+                }
+                break;
         }
     }
 
@@ -138,18 +146,32 @@ public class BattleManager : MonoBehaviour
     }
 
     void InitEnemies() {
-        //randomly spawns enemies
-        int numberOfSkeletons = Random.Range(1, 4); // Generate a random number of skeletons between 1 and 4.
-        for (int i = 0; i < numberOfSkeletons; i++) {
-            GameObject skeleton = Instantiate(skeletonPrefab);
-            BattleFighter bf = skeleton.GetComponent<BattleFighter>();
-            bf.team = 1;
-            bf.speed = Random.Range(bf.speed - 1, bf.speed + 2);
 
-            if (bf.speed <= 0) {
-                bf.speed = 1;
+        if (BattleData.Instance == null) {
+            Debug.Log("BattleData not found or null");
+        }
+        if (BattleData.Instance != null && BattleData.Instance.bossFight == 1) {
+            //spawns the boss
+            GameObject boss = Instantiate(bossPrefab);
+            BattleFighter bf = boss.GetComponent<BattleFighter>();
+            bf.team = 1;
+        } else if (BattleData.Instance != null && BattleData.Instance.compagnonState == 1) {
+            //fight the compagnon
+            //case already handled in InitParty
+        } else {
+            //randomly spawns enemies
+            int numberOfSkeletons = Random.Range(1, 4); // Generate a random number of skeletons between 1 and 4.
+            for (int i = 0; i < numberOfSkeletons; i++) {
+                GameObject skeleton = Instantiate(skeletonPrefab);
+                BattleFighter bf = skeleton.GetComponent<BattleFighter>();
+                bf.team = 1;
+                    bf.speed = Random.Range(bf.speed - 1, bf.speed + 2);
+
+                if (bf.speed <= 0) {
+                    bf.speed = 1;
+                }
+                //battleFighters.Add(bf);
             }
-            //battleFighters.Add(bf);
         }
     }
 
@@ -248,7 +270,9 @@ public class BattleManager : MonoBehaviour
         //ATB in progress
         foreach (BattleFighter fighter in battleFighters) {
             //increase the atb of all fighters
-            fighter.atb += fighter.speed * Time.deltaTime * 45;
+            if (fighter.status == 1) {
+                fighter.atb += fighter.speed * Time.deltaTime * 45;
+            }
         }
 
         //check if any fighter has reached 1000
@@ -390,9 +414,6 @@ public class BattleManager : MonoBehaviour
                 BattleData.Instance.SetPartyMemberState(battleFighters.Find(fighter => fighter.name == "Compagnon"));
             }
         }
-
-        Debug.Log("Previous scene: " + BattleData.Instance.previousScene);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(BattleData.Instance.previousScene);
         battleState = 6; //temporary
     }
 }

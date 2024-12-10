@@ -7,11 +7,12 @@ public class BattleData : MonoBehaviour
 
     private List<string> enemyNames = new List<string>();
     private List<FighterSave> fighterSaves = new List<FighterSave>();
-    public int compagnonState = 0;
+    public int compagnonState = 1;
     //0 not found
     //1 enemy
     //2 party
 
+    public int bossFight = 0; //set to 1 to spawn boss
     public string previousScene;
     public Vector3 previousPosition;
     public Quaternion previousCameraRotation;

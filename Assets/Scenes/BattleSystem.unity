@@ -1925,6 +1925,7 @@ MonoBehaviour:
   battleMenu: {fileID: 1361440508}
   battleDialogueBox: {fileID: 0}
   skeletonPrefab: {fileID: 6525239146696520869, guid: 00ef3f2c01bbaa040bac6372ccbf87b4, type: 3}
+  bossPrefab: {fileID: 6525239146696520869, guid: 052a3d251e596a64b8c2c36c3b6435a8, type: 3}
 --- !u!1001 &1923112137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2142,6 +2143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c863320d85e154da6185f3c88e4a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRemainingDialogue: 
+  currentDialogueList: []
 --- !u!1 &2041335199
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,10 +56,12 @@ public class BattleFighter : MonoBehaviour
         
         //resource check
         if (attack.mpCost > mp) {
+            battleDialogueBox.AddDialogue(name + " doesn't have enough MP to use " + attack.name);
             return false;
         }
-
+        Debug.Log("mp before = " + mp);
         mp -= attack.mpCost;
+        Debug.Log("mp after = " + mp);
         setAttackAnim(attack);
         attack.AttackEffect(this, target);
         return true;

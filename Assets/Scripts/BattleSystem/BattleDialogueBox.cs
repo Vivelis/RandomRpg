@@ -8,8 +8,8 @@ public class BattleDialogueBox : MonoBehaviour
 {
     TMP_Text dialogueText;
     string currentDialogue;
-    string currentRemainingDialogue;
-    List<string> currentDialogueList = new List<string>();
+    public string currentRemainingDialogue;
+    public List<string> currentDialogueList = new List<string>();
     int dialogueState;
     //0 = empty
     //1 = typing

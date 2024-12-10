@@ -740,6 +740,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleData
       objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: bossFight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: compagnonState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16743.164

@@ -27,13 +27,19 @@ public class BattleFighter : MonoBehaviour
     public Animator animator;
     float animTimer = 0f;
 
+    void Awake() {
+        if (animator == null) {
+            animator = gameObject.GetComponentInChildren<Animator>();
+            Debug.Log("animator attributed to :" + name);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         hp = maxHp;
         mp = maxMp;
         battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
-        animator = gameObject.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame

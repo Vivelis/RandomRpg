@@ -180,7 +180,7 @@ public class BattleManager : MonoBehaviour
         //Initialize the fighter list
         int team0Index = 0;
         int team1Index = 0;
-        Vector3 baseSpawnPosition = new Vector3(3, 1, 0); //subsequent units will spawn at +-2.5 Z on the sides
+        Vector3 baseSpawnPosition = new Vector3(3, 0, 0); //subsequent units will spawn at +-2.5 Z on the sides
 
         foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
             BattleFighter bf = obj.GetComponent<BattleFighter>();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class BattleManager : MonoBehaviour
 {
@@ -183,6 +184,8 @@ public class BattleManager : MonoBehaviour
 
         foreach(GameObject obj in GameObject.FindGameObjectsWithTag("BattleFighter")) {
             BattleFighter bf = obj.GetComponent<BattleFighter>();
+
+            Assert.IsNotNull(bf, "BattleFighter component not found on object: " + obj.name);
             if (bf.name == "Compagnon" && BattleData.Instance != null && BattleData.Instance.compagnonState != 2) {
                 if (BattleData.Instance.compagnonState == 0) {
                     obj.SetActive(false);
@@ -194,6 +197,7 @@ public class BattleManager : MonoBehaviour
                 battleFighters.Add(bf);
             }
 
+            Assert.IsNotNull(bf.animator, "Animator component not found on object: " + obj.name);
             bf.animator.SetBool("Fight", true);
             if (bf.team == 0) {
                 if (team0Index == 0) {

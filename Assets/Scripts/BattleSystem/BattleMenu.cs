@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class BattleMenu : MonoBehaviour
 {
@@ -71,8 +72,9 @@ public class BattleMenu : MonoBehaviour
     }
 
     public void SelectTarget(int setting) {
+        Assert.IsNotNull(battleFighters, "battleFighters is null");
+        Assert.IsTrue(battleFighters.Count > 0, "battleFighters is empty");
         //setting: 0 = ally, 1 = enemy, 2 = self, 3 = all
-        
         if (setting == 2) {
             currentTarget = currentActor;
         } else {
@@ -97,7 +99,6 @@ public class BattleMenu : MonoBehaviour
                 //Didn't find a suitable target so hits itself
                 currentTarget = currentActor;
             }
-            
             CloseMenu();
         }
     }

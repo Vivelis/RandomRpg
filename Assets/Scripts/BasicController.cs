@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class BasicController : MonoBehaviour
 {
-    [Header("Paramètres de mouvement")]
+    [Header("Paramï¿½tres de mouvement")]
     public float moveSpeed = 5f;
     public float rotationSpeed = 10f;
     public float gravity = -9.81f;
     public bool canMove = true;
 
-    [Header("Paramètres de collision")]
+    [Header("Paramï¿½tres de collision")]
     public LayerMask groundMask;
 
     private CharacterController controller;
@@ -30,12 +30,6 @@ public class BasicController : MonoBehaviour
 
     void Update()
     {
-        if (!canMove)
-        {
-            animator.SetInteger("Speed", 0);
-            return;
-        }
-
         isGrounded = Physics.CheckSphere(transform.position + Vector3.down * (controller.height / 2), 0.1f, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -43,6 +37,20 @@ public class BasicController : MonoBehaviour
             velocity.y = -2f;
         }
 
+        if (!canMove)
+        {
+            animator.SetInteger("Speed", 0);
+        } else {
+            MoveFromInputs();
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+
+    private void MoveFromInputs() {
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
@@ -62,10 +70,6 @@ public class BasicController : MonoBehaviour
         {
             animator.SetInteger("Speed", 0);
         }
-
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
     }
 
     private void SetupAxesRelativeToPlayer()

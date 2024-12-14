@@ -71,5 +71,65 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 44ffc5a9d6965b044a678ccc0f742469, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4998367538781903434}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 44ffc5a9d6965b044a678ccc0f742469, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6242664296227928697}
   m_SourcePrefab: {fileID: 100100000, guid: 44ffc5a9d6965b044a678ccc0f742469, type: 3}
+--- !u!1 &7881650724085632212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 44ffc5a9d6965b044a678ccc0f742469, type: 3}
+  m_PrefabInstance: {fileID: 7034717462656332165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4998367538781903434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881650724085632212}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113e883fc2cf4424c97badc345046bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 10
+  gravity: -9.81
+  canMove: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  Attack1Height: 1.9
+  Attack1Center: {x: 0, y: 1.1, z: 0}
+  DeadHeight: 1.2
+  DeadCenter: {x: 0, y: 1.2, z: 0}
+--- !u!143 &6242664296227928697
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881650724085632212}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.44
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.0001
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}

@@ -54,14 +54,99 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
       propertyPath: m_Name
-      value: Barbarian_14 Variant
+      value: Roi_demon
       objectReference: {fileID: 0}
     - target: {fileID: 1014905142845549318, guid: 570fa778e9b982048a20f732fc856291, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 092769473daf5b3449dd3c0fd346b5ed, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 570fa778e9b982048a20f732fc856291, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3756523028576857260}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2711130786378868264}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4569324982351596305}
   m_SourcePrefab: {fileID: 100100000, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+--- !u!1 &301281709731372569 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+  m_PrefabInstance: {fileID: 643794636113011528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &3756523028576857260
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301281709731372569}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.44
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.0001
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2711130786378868264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301281709731372569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113e883fc2cf4424c97badc345046bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 10
+  gravity: -9.81
+  canMove: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  Attack1Height: 1.9
+  Attack1Center: {x: 0, y: 1.1, z: 0}
+  DeadHeight: 1.2
+  DeadCenter: {x: 0, y: 1.2, z: 0}
+--- !u!95 &4569324982351596305
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301281709731372569}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+  m_Controller: {fileID: 9100000, guid: f0fd96290b176034ca53473523c5799d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

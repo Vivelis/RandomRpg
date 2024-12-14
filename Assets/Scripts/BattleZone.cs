@@ -17,6 +17,8 @@ public class BattleZone : MonoBehaviour
 
     private bool isPlayerInZone = false;
 
+    public QuestManager questManager;
+
     void FixedUpdate()
     {
         elapsedTime += Time.deltaTime;
@@ -58,7 +60,7 @@ public class BattleZone : MonoBehaviour
                 yield return null;
             }
 
-            Debug.Log("V�rification d'un combat...");
+            Debug.Log("Verification d'un combat...");
             if (Random.value < encounterChance)
             {
                 StartBattle();
@@ -71,14 +73,14 @@ public class BattleZone : MonoBehaviour
     {
         if (string.IsNullOrEmpty(battleSceneName))
         {
-            Debug.LogWarning("Aucune sc�ne de combat d�finie !");
+            Debug.LogWarning("Aucune scene de combat definie !");
             return;
         }
 
         int enemyCount = Random.Range(minEnemies, maxEnemies + 1);
         List<string> selectedEnemies = new List<string>();
 
-        Debug.Log("G�n�ration des ennemis...");
+        Debug.Log("Generation des ennemis...");
         for (int i = 0; i < enemyCount; i++)
         {
             int randomIndex = Random.Range(0, possibleEnemies.Count);
@@ -93,9 +95,54 @@ public class BattleZone : MonoBehaviour
         BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
         BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
-        //set the compagnon
+        
+        if (int.Parse(questManager.GetCurrentQuestId()) <= 4)
+        {
+            BattleData.Instance.compagnonState = 0;
+        } else if (int.Parse(questManager.GetCurrentQuestId()) > 8)
+        {
+            BattleData.Instance.compagnonState = 2;
+        }
 
         Debug.Log("Lancement du combat...");
         SceneManager.LoadScene(battleSceneName);
+    }
+
+    public void StartBattleSpe(int QuestId)
+    {
+        if (string.IsNullOrEmpty(battleSceneName))
+        {
+            Debug.LogWarning("Aucune scene de combat definie !");
+            return;
+        }
+
+        if (QuestId == 5)
+        {
+            if (BattleData.Instance == null)
+            {
+                BattleData.Instance = new BattleData();
+                BattleData.Instance.TestSave();
+            }
+            BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
+            BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
+
+            BattleData.Instance.compagnonState = 1;
+
+            SceneManager.LoadScene(battleSceneName);
+        } else if (QuestId == 8) {
+            if (BattleData.Instance == null)
+            {
+                BattleData.Instance = new BattleData();
+                BattleData.Instance.TestSave();
+            }
+            BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
+            BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
+
+            BattleData.Instance.compagnonState = 2;
+
+            SceneManager.LoadScene(battleSceneName);
+        }
     }
 }

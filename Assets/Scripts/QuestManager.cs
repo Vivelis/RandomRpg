@@ -63,7 +63,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 }
                 else
                 {
-                    Debug.LogError("Erreur : les donn�es JSON sont nulles ou vides apr�s la d�s�rialisation.");
+                    Debug.LogError("Erreur : les donnees JSON sont nulles ou vides apres la d�s�rialisation.");
                 }
             }
             catch (System.Exception ex)

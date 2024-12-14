@@ -15,24 +15,35 @@ public class PlayerSpawner : MonoBehaviour
             if (GameManager.Instance.PreviousScene != null)
             {
                 string previousScene = GameManager.Instance.PreviousScene;
+
                 foreach (var config in spawnConfigurations)
                 {
                     if (config.sceneName == previousScene)
                     {
-                        Debug.Log("Position de spawn configur�e pour la sc�ne " + previousScene);
+                        Debug.Log("Position1 de spawn configur�e pour la sc�ne " + previousScene);
                         // Applique la position et l'orientation configur�es
                         transform.position = config.spawnPosition;
                         transform.rotation = Quaternion.Euler(0, config.spawnRotationY, 0);
-                        return;
+                        break;
                     }
                 }
-            } else {
-                if (!(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "BattleSystem")) {
-                    transform.position = defaultSpawnPosition;
-                    transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
-                } else {
-                    GetComponent<BasicController>().canMove = false;                    
+            }
+            if (!(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "BattleSystem")) {
+                if (BattleData.Instance != null && BattleData.Instance.previousPosition != Vector3.zero) {
+                    transform.position = BattleData.Instance.previousPosition;
+                    transform.rotation = BattleData.Instance.previousCameraRotation;
+                    BattleData.Instance.previousPosition = Vector3.zero;
+                    BattleData.Instance.previousRotation = Quaternion.identity;
+                    BattleData.Instance.previousCameraPosition = Vector3.zero;
+                    BattleData.Instance.previousCameraRotation = Quaternion.identity;
+                    Debug.Log("Set player position to : " + transform.position);
+                    return;
                 }
+                // transform.position = defaultSpawnPosition;
+                // transform.rotation = Quaternion.Euler(0, defaultSpawnRotationY, 0);
+                // Debug.Log("Position2 de spawn par d�faut, valeur : " + defaultSpawnPosition);
+            } else {
+                GetComponent<BasicController>().canMove = false;
             }
         }
     }

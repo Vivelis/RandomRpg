@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Assertions;
 
 public class BattleZone : MonoBehaviour
 {
@@ -13,9 +14,17 @@ public class BattleZone : MonoBehaviour
     [SerializeField] private float encounterChance = 0.5f;
     [SerializeField] private float checkInterval = 1.0f;
 
+    private BattleData battleData;
     private float elapsedTime = 0.0f;
 
     private bool isPlayerInZone = false;
+
+    void Start()
+    {
+        battleData = BattleData.Instance;
+        Assert.IsNotNull(battleData, "BattleData n'a pas �t� trouv� !");
+        battleData.LaunchCooldown();
+    }
 
     void FixedUpdate()
     {
@@ -23,7 +32,7 @@ public class BattleZone : MonoBehaviour
         if (elapsedTime >= checkInterval)
         {
             Debug.Log("Verif combat");
-            if (Random.value < encounterChance) {
+            if (Random.value < encounterChance && battleData.isInCooldown == false) {
                 StartBattle();
             }
             elapsedTime = 0.0f;
@@ -59,7 +68,7 @@ public class BattleZone : MonoBehaviour
             }
 
             Debug.Log("V�rification d'un combat...");
-            if (Random.value < encounterChance)
+            if (Random.value < encounterChance && battleData.isInCooldown == false)
             {
                 StartBattle();
                 yield break;
@@ -92,7 +101,10 @@ public class BattleZone : MonoBehaviour
         BattleData.Instance.SetBattleData(selectedEnemies);
         BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
+        BattleData.Instance.previousRotation = GameObject.Find("Player").transform.rotation;
+        BattleData.Instance.previousCameraPosition = GameObject.Find("Main Camera").transform.position;
         BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
+        Debug.Log("Position de sauvegarde : " + BattleData.Instance.previousPosition);
         //set the compagnon
 
         Debug.Log("Lancement du combat...");

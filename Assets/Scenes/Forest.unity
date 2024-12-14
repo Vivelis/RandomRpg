@@ -740,9 +740,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleData
       objectReference: {fileID: 0}
+    - target: {fileID: 4092336306673361236, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
       propertyPath: bossFight
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: cooldownTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: isInCooldown
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
       propertyPath: compagnonState

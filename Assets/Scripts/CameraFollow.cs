@@ -11,6 +11,15 @@ public class CameraFollow : MonoBehaviour
     private Vector3 initialOffset;
     private bool initialized = false;
 
+    public void SetInitialOffset()
+    {
+        initialOffset = -player.forward * followDistance + Vector3.up * height;
+            transform.position = player.position + initialOffset;
+
+            transform.rotation = Quaternion.Euler(lookDownAngle, player.eulerAngles.y, 0);
+            initialized = true;
+    }
+
     void LateUpdate()
     {
         if (player == null)
@@ -20,11 +29,7 @@ public class CameraFollow : MonoBehaviour
 
         if (!initialized)
         {
-            initialOffset = -player.forward * followDistance + Vector3.up * height;
-            transform.position = player.position + initialOffset;
-
-            transform.rotation = Quaternion.Euler(lookDownAngle, player.eulerAngles.y, 0);
-            initialized = true;
+            SetInitialOffset();
         }
 
         Vector3 targetPosition = player.position + initialOffset;

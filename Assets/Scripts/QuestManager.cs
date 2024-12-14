@@ -10,7 +10,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public Dictionary<string, QuestStateData> questData;
     public UnityEvent onQuestStateChange = new UnityEvent();
-    private string currentQuestId = "1";
+    private string currentQuestId = "8";
+    private bool particuleStatus = true;
 
     private void Awake()
     {
@@ -118,12 +119,16 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void Update()
     {
-        if (9 <= int.Parse(currentQuestId))
+        if (8 <= int.Parse(currentQuestId))
         {
-            GameObject gameObject = GameObject.Find("Particle System");
-            if (gameObject.activeSelf)
+            if (particuleStatus)
             {
-                gameObject.SetActive(false);
+                GameObject gameObject = GameObject.Find("Particle System");
+                if (gameObject.activeSelf)
+                {
+                    gameObject.SetActive(false);
+                    particuleStatus = false;
+                }
             }
         }
     }
@@ -147,7 +152,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                             if (pnjStatus.pnjName == "Compagnon" && pnjStatus.active == true && obj.name == "Compagnon" && obj.scene == SceneManager.GetActiveScene())
                             {
                                 obj.SetActive(true);
-                            } else if (pnjStatus.pnjName == "Roi d�mon" && pnjStatus.active == true && obj.name == "Roi d�mon" && obj.scene == SceneManager.GetActiveScene())
+                            } else if (pnjStatus.pnjName == "Roi démon" && pnjStatus.active == true && obj.name == "Roi démon" && obj.scene == SceneManager.GetActiveScene())
                             {
                                 obj.SetActive(true);
                             }

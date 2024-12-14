@@ -48,6 +48,7 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
+            Debug.Log(questDialogues.Count);
             Debug.LogWarning($"PNJ {pnjName}: DialogueState {dialogueState} est hors des limites.");
         }
     }

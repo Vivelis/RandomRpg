@@ -1955,8 +1955,8 @@ MonoBehaviour:
   maxEnemies: 3
   possibleEnemies:
   - {fileID: 6525239146696520869, guid: 00ef3f2c01bbaa040bac6372ccbf87b4, type: 3}
-  encounterChance: 0.2
-  checkInterval: 1
+  encounterChance: 0.4
+  checkInterval: 6
   questManager: {fileID: 1590504322}
 --- !u!64 &375447518
 MeshCollider:

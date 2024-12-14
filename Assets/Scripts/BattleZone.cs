@@ -12,7 +12,7 @@ public class BattleZone : MonoBehaviour
     [SerializeField] private int maxEnemies = 3;
     [SerializeField] private List<GameObject> possibleEnemies;
     [SerializeField] private float encounterChance = 0.5f;
-    [SerializeField] private float checkInterval = 1.0f;
+    [SerializeField] private float checkInterval = 10.0f;
 
     private BattleData battleData;
     private float elapsedTime = 0.0f;
@@ -69,7 +69,6 @@ public class BattleZone : MonoBehaviour
                 yield return null;
             }
 
-            Debug.Log("V�rification d'un combat...");
             if (Random.value < encounterChance && battleData.isInCooldown == false)
             {
                 StartBattle();
@@ -89,7 +88,6 @@ public class BattleZone : MonoBehaviour
         int enemyCount = Random.Range(minEnemies, maxEnemies + 1);
         List<string> selectedEnemies = new List<string>();
 
-        Debug.Log("Generation des ennemis...");
         for (int i = 0; i < enemyCount; i++)
         {
             int randomIndex = Random.Range(0, possibleEnemies.Count);

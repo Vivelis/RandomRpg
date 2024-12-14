@@ -60,8 +60,7 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 092769473daf5b3449dd3c0fd346b5ed, type: 2}
-    m_RemovedComponents:
-    - {fileID: 5866666021909216657, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -74,6 +73,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4569324982351596305}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7021602300357921018}
   m_SourcePrefab: {fileID: 100100000, guid: 570fa778e9b982048a20f732fc856291, type: 3}
 --- !u!1 &301281709731372569 stripped
 GameObject:
@@ -97,7 +99,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.44
@@ -113,7 +115,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301281709731372569}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113e883fc2cf4424c97badc345046bee, type: 3}
   m_Name: 
@@ -150,3 +152,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &7021602300357921018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301281709731372569}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.9212108, z: 1}
+  m_Center: {x: 0, y: 0.92285424, z: 0}

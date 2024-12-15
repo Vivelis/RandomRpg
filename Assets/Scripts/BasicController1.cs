@@ -2,7 +2,22 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
 
-public class BasicController : MonoBehaviour
+[System.Serializable]
+public class TransformData
+{
+    public Vector3 position;
+    public Quaternion rotation;
+    public Vector3 scale;
+
+    public TransformData(Vector3 pos, Quaternion rot, Vector3 scl)
+    {
+        position = pos;
+        rotation = rot;
+        scale = scl;
+    }
+}
+
+public class BasicController1 : MonoBehaviour
 {
     [Header("Param�tres de mouvement")]
     public float moveSpeed = 5f;
@@ -18,14 +33,21 @@ public class BasicController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
+    private bool anim = false;
+
     private Vector3 forwardAxis;
     private Vector3 rightAxis;
 
     private float originalHeight;
     private Vector3 originalCenter;
 
+    public float Attack1Height;
+    public Vector3 Attack1Center;
+
     public float DeadHeight;
     public Vector3 DeadCenter;
+
+    private TransformData savedTransform;
 
     void Start()
     {
@@ -35,64 +57,38 @@ public class BasicController : MonoBehaviour
         originalHeight = controller.height;
         originalCenter = controller.center;
 
-        animator.SetBool("Fight", false);
+        Transform currentTransform = transform;
+        savedTransform = new TransformData(
+            currentTransform.position,
+            currentTransform.rotation,
+            currentTransform.localScale
+        );
+
+        animator.SetBool("Fight", true);
 
         SetupAxesRelativeToPlayer();
     }
 
     void Update()
     {
-        isGrounded = Physics.CheckSphere(transform.position + Vector3.down * (controller.height / 2), 0.1f, groundMask);
-
-        if (isGrounded && velocity.y < 0)
+        if (!anim)
         {
-            velocity.y = -2f;
+            if (savedTransform != null)
+            {
+                transform.position = savedTransform.position;
+                transform.rotation = savedTransform.rotation;
+                transform.localScale = savedTransform.scale;
+
+                Debug.Log("Transform restauré !");
+            }
         }
-
-        if (!canMove)
-        {
-            animator.SetInteger("Speed", 0);
-        }
-        else
-        {
-            MoveFromInputs();
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
-
-        // Test des animations
-        //TestAnimations();
+        TestAnimations();
     }
 
     private void AdjustCharacterController(float height, Vector3 center)
     {
         controller.height = height;
         controller.center = center;
-    }
-
-    private void MoveFromInputs()
-    {
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
-
-        Vector3 direction = (forwardAxis * vertical + rightAxis * horizontal).normalized;
-
-        if (direction.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            float angle = Mathf.LerpAngle(transform.eulerAngles.y, targetAngle, rotationSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            controller.Move(direction * moveSpeed * Time.deltaTime);
-
-            animator.SetInteger("Speed", 2);
-        }
-        else
-        {
-            animator.SetInteger("Speed", 0);
-        }
     }
 
     private void SetupAxesRelativeToPlayer()
@@ -106,22 +102,19 @@ public class BasicController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             StartCoroutine(PlayAnimation("Attack1"));
+            AdjustCharacterController(Attack1Height, Attack1Center);
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            StartCoroutine(PlayAnimation("Attack2"));
+            StartCoroutine(PlayAnimationFast("Attack2"));
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(PlayAnimation("Attack3"));
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine(PlayAnimation("Boost1"));
+            StartCoroutine(PlayAnimationFast("Attack3"));
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            StartCoroutine(PlayAnimation("Damage"));
+            StartCoroutine(PlayAnimationDamage("Damage"));
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
@@ -132,11 +125,35 @@ public class BasicController : MonoBehaviour
 
     private IEnumerator PlayAnimation(string animationName)
     {
+        anim = true;
         animator.SetBool(animationName, true);
         Debug.Log(animationName);
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.7f);
         animator.SetBool(animationName, false);
         AdjustCharacterController(originalHeight, originalCenter);
+        anim = false;
+    }
+
+    private IEnumerator PlayAnimationFast(string animationName)
+    {
+        anim = true;
+        animator.SetBool(animationName, true);
+        Debug.Log(animationName);
+        yield return new WaitForSeconds(1.45f);
+        animator.SetBool(animationName, false);
+        AdjustCharacterController(originalHeight, originalCenter);
+        anim = false;
+    }
+
+    private IEnumerator PlayAnimationDamage(string animationName)
+    {
+        anim = true;
+        animator.SetBool(animationName, true);
+        Debug.Log(animationName);
+        yield return new WaitForSeconds(0.7f);
+        animator.SetBool(animationName, false);
+        AdjustCharacterController(originalHeight, originalCenter);
+        anim = false;
     }
 
     private IEnumerator PlayAnimationDead(string animationName)

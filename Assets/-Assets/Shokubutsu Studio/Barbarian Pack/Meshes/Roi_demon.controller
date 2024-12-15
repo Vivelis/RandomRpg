@@ -71,7 +71,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 224e6eb8b6a9f0046905b1eeeecf09c2, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: f16caef68b3df58499ef6b2ffefd3127, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -123,7 +123,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 4600314aa86f892458cac2b4e586eb66, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 48909ef2d6c5ffc46a83e19455243816, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -322,7 +322,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player1
+  m_Name: Roi_demon
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Fight

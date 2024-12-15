@@ -116,6 +116,7 @@ public class BattleManager : MonoBehaviour
             case 6:
                 if (battleDialogueBox != null && battleDialogueBox.currentDialogueList.Count == 0 && battleDialogueBox.currentRemainingDialogue == "") {
                     Debug.Log("Previous scene: " + BattleData.Instance.previousScene);
+                    BattleData.Instance.LaunchCooldown();
                     UnityEngine.SceneManagement.SceneManager.LoadScene(BattleData.Instance.previousScene);
                 }
                 break;

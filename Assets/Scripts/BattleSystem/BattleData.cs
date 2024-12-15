@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +9,19 @@ public class BattleData : MonoBehaviour
     private List<string> enemyNames = new List<string>();
     private List<FighterSave> fighterSaves = new List<FighterSave>();
     public int compagnonState = 1;
+
+    public float cooldownTime = 5.0f;
+    public bool isInCooldown = false;
     //0 not found
     //1 enemy
     //2 party
 
     public int bossFight = 0; //set to 1 to spawn boss
     public string previousScene;
-    public Vector3 previousPosition;
-    public Quaternion previousCameraRotation;
+    public Vector3 previousPosition = Vector3.zero;
+    public Quaternion previousRotation = Quaternion.identity;
+    public Vector3 previousCameraPosition = Vector3.zero;
+    public Quaternion previousCameraRotation = Quaternion.identity;
 
     private void Awake()
     {
@@ -127,5 +133,15 @@ public class BattleData : MonoBehaviour
             save.hp = save.maxHp;
             save.mp = save.maxMp;
         }
+    }
+
+    public void LaunchCooldown() {
+        isInCooldown = true;
+        StartCoroutine(Cooldown());
+    }
+
+    private IEnumerator Cooldown() {
+        yield return new WaitForSeconds(cooldownTime);
+        isInCooldown = false;
     }
 }

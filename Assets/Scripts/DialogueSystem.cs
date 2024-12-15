@@ -23,6 +23,8 @@ public class DialogueSystem : MonoBehaviour
     private int dialogueState;
     private bool actionRequired = false;
 
+    BattleZone startBattleSpe;
+
     public void UpdateStatus(PNJStatus status)
     {
         dialogueState = status.dialogueState;
@@ -46,6 +48,7 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
+            Debug.Log(questDialogues.Count);
             Debug.LogWarning($"PNJ {pnjName}: DialogueState {dialogueState} est hors des limites.");
         }
     }
@@ -86,6 +89,8 @@ public class DialogueSystem : MonoBehaviour
 
         if (actionRequired)
         {
+            //startBattleSpe.StartBattleSpe(5);
+            //Debug.Log("StartBattleSpe");
             QuestManager.instance.AdvanceQuestState();
         }
     }

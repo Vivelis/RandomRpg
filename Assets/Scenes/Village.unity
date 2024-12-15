@@ -1626,6 +1626,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4998367538781903434, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5157975374901913563, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -1657,6 +1661,10 @@ PrefabInstance:
     - target: {fileID: 5996501393624798576, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242664296227928697, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6348534641420453844, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
       propertyPath: m_Layer
@@ -3132,8 +3140,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 770.4811, y: -353}
-  m_SizeDelta: {x: -1540.9622, y: -970.8537}
+  m_AnchoredPosition: {x: 770.48047, y: -352.9998}
+  m_SizeDelta: {x: -1540.9609, y: -970.8532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378500941
 MonoBehaviour:
@@ -6396,6 +6404,18 @@ MonoBehaviour:
       a chance to defeat him.'
     - 'Lyra: (smiling) Very well. Then let''s go. We have a world to save.'
   - questState: 1
+    dialogues:
+    - 'Mate: We should go.'
+  - questState: 2
+    dialogues:
+    - 'Companion: Lyra. Thank you for what you did. If you hadn''t saved me, I would
+      still be under that monster''s control. Now, I want to help you defeat him.'
+    - 'Lyra: You don''t have to. It will be dangerous.'
+    - 'Companion: I know. But it''s the only way to redeem myself. Together, we have
+      a chance to defeat him.'
+    - 'Lyra: (smiling) Very well. Then let''s go. We have a world to save.'
+    - 'Lyra: (smiling) Very well. Then let''s go. We have a world to save.'
+  - questState: 3
     dialogues:
     - 'Mate: We should go.'
 --- !u!1001 &1148577173
@@ -11157,29 +11177,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue_01
       objectReference: {fileID: 0}
+    - target: {fileID: 5250171488970345013, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6615627466523090020, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6615627466523090020, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
       propertyPath: m_margin.w
-      value: -25.96045
+      value: 3.6842766
       objectReference: {fileID: 0}
     - target: {fileID: 6615627466523090020, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
       propertyPath: m_margin.y
-      value: -20.470642
+      value: 5.3952346
       objectReference: {fileID: 0}
     - target: {fileID: 6615627466523090020, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
       propertyPath: m_margin.z
-      value: -1683.6256
+      value: -1.1220703
+      objectReference: {fileID: 0}
+    - target: {fileID: 6615627466523090020, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017827632895095944, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017827632895095944, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017827632895095944, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9017827632895095944, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2654542
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9017827632895095944, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9017827632895095944, guid: 008acdf44ac750f49bfa45d7a3198208, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -947
+      value: -880
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11411,6 +11455,10 @@ PrefabInstance:
     - target: {fileID: 697065504524178788, guid: 3c80a092456db3f45a0221db0b9e6532, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781343978733033432, guid: 3c80a092456db3f45a0221db0b9e6532, type: 3}
+      propertyPath: detectionRadius
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

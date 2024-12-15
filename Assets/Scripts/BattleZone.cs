@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Assertions;
 
 public class BattleZone : MonoBehaviour
 {
@@ -11,11 +12,21 @@ public class BattleZone : MonoBehaviour
     [SerializeField] private int maxEnemies = 3;
     [SerializeField] private List<GameObject> possibleEnemies;
     [SerializeField] private float encounterChance = 0.5f;
-    [SerializeField] private float checkInterval = 1.0f;
+    [SerializeField] private float checkInterval = 10.0f;
 
+    private BattleData battleData;
     private float elapsedTime = 0.0f;
 
     private bool isPlayerInZone = false;
+    
+    public QuestManager questManager;
+    
+    void Start()
+    {
+        battleData = BattleData.Instance;
+        Assert.IsNotNull(battleData, "BattleData n'a pas �t� trouv� !");
+        battleData.LaunchCooldown();
+    }
 
     void FixedUpdate()
     {
@@ -23,7 +34,7 @@ public class BattleZone : MonoBehaviour
         if (elapsedTime >= checkInterval)
         {
             Debug.Log("Verif combat");
-            if (Random.value < encounterChance) {
+            if (Random.value < encounterChance && battleData.isInCooldown == false) {
                 StartBattle();
             }
             elapsedTime = 0.0f;
@@ -58,8 +69,7 @@ public class BattleZone : MonoBehaviour
                 yield return null;
             }
 
-            Debug.Log("V�rification d'un combat...");
-            if (Random.value < encounterChance)
+            if (Random.value < encounterChance && battleData.isInCooldown == false)
             {
                 StartBattle();
                 yield break;
@@ -71,14 +81,13 @@ public class BattleZone : MonoBehaviour
     {
         if (string.IsNullOrEmpty(battleSceneName))
         {
-            Debug.LogWarning("Aucune sc�ne de combat d�finie !");
+            Debug.LogWarning("Aucune scene de combat definie !");
             return;
         }
 
         int enemyCount = Random.Range(minEnemies, maxEnemies + 1);
         List<string> selectedEnemies = new List<string>();
 
-        Debug.Log("G�n�ration des ennemis...");
         for (int i = 0; i < enemyCount; i++)
         {
             int randomIndex = Random.Range(0, possibleEnemies.Count);
@@ -92,10 +101,58 @@ public class BattleZone : MonoBehaviour
         BattleData.Instance.SetBattleData(selectedEnemies);
         BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
+        BattleData.Instance.previousRotation = GameObject.Find("Player").transform.rotation;
+        BattleData.Instance.previousCameraPosition = GameObject.Find("Main Camera").transform.position;
         BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
-        //set the compagnon
+        Debug.Log("Position de sauvegarde : " + BattleData.Instance.previousPosition);
+        
+        if (int.Parse(questManager.GetCurrentQuestId()) <= 4)
+        {
+            BattleData.Instance.compagnonState = 0;
+        } else if (int.Parse(questManager.GetCurrentQuestId()) > 8)
+        {
+            BattleData.Instance.compagnonState = 2;
+        }
 
         Debug.Log("Lancement du combat...");
         SceneManager.LoadScene(battleSceneName);
+    }
+
+    public void StartBattleSpe(int QuestId)
+    {
+        if (string.IsNullOrEmpty(battleSceneName))
+        {
+            Debug.LogWarning("Aucune scene de combat definie !");
+            return;
+        }
+
+        if (QuestId == 5)
+        {
+            if (BattleData.Instance == null)
+            {
+                BattleData.Instance = new BattleData();
+                BattleData.Instance.TestSave();
+            }
+            BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
+            BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
+
+            BattleData.Instance.compagnonState = 1;
+
+            SceneManager.LoadScene(battleSceneName);
+        } else if (QuestId == 8) {
+            if (BattleData.Instance == null)
+            {
+                BattleData.Instance = new BattleData();
+                BattleData.Instance.TestSave();
+            }
+            BattleData.Instance.previousScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            BattleData.Instance.previousPosition = GameObject.Find("Player").transform.position;
+            BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
+
+            BattleData.Instance.compagnonState = 2;
+
+            SceneManager.LoadScene(battleSceneName);
+        }
     }
 }

@@ -78,8 +78,6 @@ public class BasicController1 : MonoBehaviour
                 transform.position = savedTransform.position;
                 transform.rotation = savedTransform.rotation;
                 transform.localScale = savedTransform.scale;
-
-                Debug.Log("Transform restauré !");
             }
         }
         TestAnimations();

@@ -1696,6 +1696,7 @@ MonoBehaviour:
   dialogueText: {fileID: 2070101131}
   panel: {fileID: 2070101130}
   pnjName: Compagnon
+  pnjIndex: 1
   playerController: {fileID: 63608961}
   questDialogues:
   - questState: 0
@@ -1712,6 +1713,7 @@ MonoBehaviour:
     - 'Lyra: It''s over. You were under the Demon King''s control, but I freed you.
       Come, I''ll take you back to the village.'
     - 'Man: (weakly) Thank you... I... I''m sorry..'
+  startBattleSpe: {fileID: 375447517}
 --- !u!1 &260688685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,9 +1957,10 @@ MonoBehaviour:
   maxEnemies: 3
   possibleEnemies:
   - {fileID: 6525239146696520869, guid: 00ef3f2c01bbaa040bac6372ccbf87b4, type: 3}
-  encounterChance: 0.4
-  checkInterval: 6
+  encounterChance: 0.1
+  checkInterval: 15
   questManager: {fileID: 1590504322}
+  zoneStatus: 0
 --- !u!64 &375447518
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2149,7 +2152,7 @@ GameObject:
   - component: {fileID: 505481052}
   - component: {fileID: 505481055}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Particule System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

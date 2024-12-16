@@ -7,6 +7,9 @@ public class DialogueSystem : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public GameObject panel;
     public string pnjName;
+
+    public int pnjIndex;
+
     public PNJInteractionWithCharacterController playerController;
 
     [System.Serializable]
@@ -23,13 +26,17 @@ public class DialogueSystem : MonoBehaviour
     private int dialogueState;
     private bool actionRequired = false;
 
-    BattleZone startBattleSpe;
+    private BattleData battleData;
+
+    public BattleZone startBattleSpe;
 
     public void UpdateStatus(PNJStatus status)
     {
         dialogueState = status.dialogueState;
         actionRequired = status.action;
         gameObject.SetActive(status.active);
+
+        Debug.Log("AAAAAAAAAAAAAA         " + status.dialogueState);
     }
 
     public void StartDialogue()
@@ -89,9 +96,16 @@ public class DialogueSystem : MonoBehaviour
 
         if (actionRequired)
         {
-            //startBattleSpe.StartBattleSpe(5);
-            //Debug.Log("StartBattleSpe");
-            QuestManager.instance.AdvanceQuestState();
+            if (pnjIndex == 1 && dialogueState == 0)
+            {
+                startBattleSpe.StartBattleSpe(4);
+            } else if (pnjIndex == 2 && dialogueState == 0)
+            {
+                startBattleSpe.StartBattleSpe(8);
+            } else
+            {
+                QuestManager.instance.AdvanceQuestState();
+            }
         }
     }
 }

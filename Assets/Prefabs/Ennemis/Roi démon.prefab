@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 570fa778e9b982048a20f732fc856291, type: 3}
       propertyPath: m_Name
-      value: Roi_demon
+      value: "Roi d\xE9mon"
       objectReference: {fileID: 0}
     - target: {fileID: 1014905142845549318, guid: 570fa778e9b982048a20f732fc856291, type: 3}
       propertyPath: m_Materials.Array.data[0]

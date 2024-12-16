@@ -20,7 +20,9 @@ public class BattleZone : MonoBehaviour
     private bool isPlayerInZone = false;
     
     public QuestManager questManager;
-    
+
+    public int zoneStatus = 0;
+
     void Start()
     {
         battleData = BattleData.Instance;
@@ -88,12 +90,6 @@ public class BattleZone : MonoBehaviour
         int enemyCount = Random.Range(minEnemies, maxEnemies + 1);
         List<string> selectedEnemies = new List<string>();
 
-        for (int i = 0; i < enemyCount; i++)
-        {
-            int randomIndex = Random.Range(0, possibleEnemies.Count);
-            selectedEnemies.Add(possibleEnemies[randomIndex].name);
-        }
-
         if (BattleData.Instance == null) {
             BattleData.Instance = new BattleData();
             BattleData.Instance.TestSave();
@@ -109,12 +105,15 @@ public class BattleZone : MonoBehaviour
         if (int.Parse(questManager.GetCurrentQuestId()) <= 4)
         {
             BattleData.Instance.compagnonState = 0;
-        } else if (int.Parse(questManager.GetCurrentQuestId()) > 8)
+        } else if (int.Parse(questManager.GetCurrentQuestId()) >= 8)
         {
             BattleData.Instance.compagnonState = 2;
         }
 
-        Debug.Log("Lancement du combat...");
+        if (zoneStatus == 2)
+            BattleData.Instance.zoneStatus = 2;
+        else
+            BattleData.Instance.zoneStatus = 1;
         SceneManager.LoadScene(battleSceneName);
     }
 
@@ -126,7 +125,7 @@ public class BattleZone : MonoBehaviour
             return;
         }
 
-        if (QuestId == 5)
+        if (QuestId == 4)
         {
             if (BattleData.Instance == null)
             {
@@ -138,6 +137,13 @@ public class BattleZone : MonoBehaviour
             BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
 
             BattleData.Instance.compagnonState = 1;
+
+            if (zoneStatus == 2)
+                BattleData.Instance.zoneStatus = 2;
+            else
+                BattleData.Instance.zoneStatus = 1;
+
+            BattleData.Instance.specialBattle = 1;
 
             SceneManager.LoadScene(battleSceneName);
         } else if (QuestId == 8) {
@@ -151,6 +157,14 @@ public class BattleZone : MonoBehaviour
             BattleData.Instance.previousCameraRotation = GameObject.Find("Main Camera").transform.rotation;
 
             BattleData.Instance.compagnonState = 2;
+            BattleData.Instance.bossFight = 1;
+
+            if (zoneStatus == 2)
+                BattleData.Instance.zoneStatus = 2;
+            else
+                BattleData.Instance.zoneStatus = 1;
+
+            BattleData.Instance.specialBattle = 2;
 
             SceneManager.LoadScene(battleSceneName);
         }

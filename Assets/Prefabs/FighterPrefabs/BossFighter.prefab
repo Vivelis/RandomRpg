@@ -60,8 +60,9 @@ MonoBehaviour:
   speed: 3
   accuracy: 5
   attacks:
-  - {fileID: 2815212803751204278, guid: a5356b3ec88952a4d85885984048a1c8, type: 3}
-  - {fileID: 8638332403681833088, guid: b9b152b0bb715ef43b63f1ee3507f0b6, type: 3}
+  - {fileID: 4459408934331021961, guid: 2fb2d202a910b66448a33ce97115e68d, type: 3}
+  - {fileID: 275254277624167613, guid: f3098537693705946b5c375cb7857e9d, type: 3}
+  - {fileID: 2205507339923821229, guid: a8c50d7af17595449967ef41c710b94d, type: 3}
   status: 1
   atb: 0
   level: 1
@@ -85,7 +86,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1
@@ -181,6 +182,14 @@ PrefabInstance:
     - target: {fileID: 2272068683281593444, guid: 7a9a0d08bb14c6c41becc1c4c818b4e5, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5038
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711130786378868264, guid: 7a9a0d08bb14c6c41becc1c4c818b4e5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756523028576857260, guid: 7a9a0d08bb14c6c41becc1c4c818b4e5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

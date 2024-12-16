@@ -1476,6 +1476,7 @@ MonoBehaviour:
   dialogueText: {fileID: 61817041}
   panel: {fileID: 257655111}
   pnjName: Mother
+  pnjIndex: 0
   playerController: {fileID: 1389459901864229025}
   questDialogues:
   - questState: 0
@@ -1490,6 +1491,7 @@ MonoBehaviour:
   - questState: 1
     dialogues:
     - 'Mom: Take care of yourself my daughter...'
+  startBattleSpe: {fileID: 0}
 --- !u!1001 &128563826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5949,6 +5951,7 @@ MonoBehaviour:
   dialogueText: {fileID: 61817041}
   panel: {fileID: 257655111}
   pnjName: Chef_village
+  pnjIndex: 0
   playerController: {fileID: 1389459901864229025}
   questDialogues:
   - questState: 0
@@ -5984,6 +5987,7 @@ MonoBehaviour:
   - questState: 4
     dialogues:
     - 'Village Chief: Thanks for saving him. But the Demon King is still here!'
+  startBattleSpe: {fileID: 0}
 --- !u!1001 &1057434348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6393,6 +6397,7 @@ MonoBehaviour:
   dialogueText: {fileID: 61817041}
   panel: {fileID: 257655111}
   pnjName: Compagnon
+  pnjIndex: 0
   playerController: {fileID: 1389459901864229025}
   questDialogues:
   - questState: 0
@@ -6418,6 +6423,7 @@ MonoBehaviour:
   - questState: 3
     dialogues:
     - 'Mate: We should go.'
+  startBattleSpe: {fileID: 0}
 --- !u!1001 &1148577173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7631,6 +7637,7 @@ MonoBehaviour:
   dialogueText: {fileID: 61817041}
   panel: {fileID: 257655111}
   pnjName: Soigneur
+  pnjIndex: 0
   playerController: {fileID: 1389459901864229025}
   questDialogues:
   - questState: 0
@@ -7638,6 +7645,7 @@ MonoBehaviour:
     - 'Healer: I will heal you...'
     - 'Healer: It''s done!'
     - 'Healer: Good luck on your quest.'
+  startBattleSpe: {fileID: 0}
 --- !u!65 &1362863938
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8965,6 +8973,7 @@ MonoBehaviour:
   dialogueText: {fileID: 61817041}
   panel: {fileID: 257655111}
   pnjName: Garde
+  pnjIndex: 0
   playerController: {fileID: 1389459901864229025}
   questDialogues:
   - questState: 0
@@ -8984,6 +8993,7 @@ MonoBehaviour:
   - questState: 2
     dialogues:
     - 'Guard: You can now enter the cave to fight the Demon King....Good luck!'
+  startBattleSpe: {fileID: 0}
 --- !u!1 &1590142779
 GameObject:
   m_ObjectHideFlags: 0
@@ -11542,6 +11552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e0d9be95162054ca9c0e198f67412c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particuleSystem: {fileID: 0}
   onQuestStateChange:
     m_PersistentCalls:
       m_Calls: []

@@ -59,6 +59,8 @@ MonoBehaviour:
   accuracy: 5
   attacks:
   - {fileID: 8638332403681833088, guid: b9b152b0bb715ef43b63f1ee3507f0b6, type: 3}
+  - {fileID: 2046515530611724247, guid: 5520624c367230c4f96adb2c135cdd63, type: 3}
+  - {fileID: 4074006002239512104, guid: f5ac9a062db947940b7ded07163e7ba7, type: 3}
   status: 1
   atb: 0
   level: 1

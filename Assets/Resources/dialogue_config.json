@@ -471,8 +471,9 @@
             },
             {
               "pnjName": "Roi démon",
-              "active": false,
-              "dialogueState": 0
+              "active": true,
+              "dialogueState": 0,
+              "action": true
             }
           ]
         },
@@ -532,7 +533,7 @@
             {
               "pnjName": "Roi démon",
               "active": true,
-              "dialogueState": 0,
+              "dialogueState": 1,
               "action": true
             }
           ]
@@ -587,14 +588,14 @@
           "pnjStatuses": [
             {
               "pnjName": "Compagnon",
-              "active": false,
-              "dialogueState": 4
+              "active": true,
+              "dialogueState": 4,
+              "action": true
             },
             {
               "pnjName": "Roi démon",
-              "active": true,
-              "dialogueState": 1,
-              "action": true
+              "active": false,
+              "dialogueState": 1
             }
           ]
         },

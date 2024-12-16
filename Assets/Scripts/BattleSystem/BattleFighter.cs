@@ -52,9 +52,6 @@ public class BattleFighter : MonoBehaviour
             animator.SetBool("Attack1", false);
             animator.SetBool("Attack2", false);
             animator.SetBool("Attack3", false);
-            animator.SetBool("Attack4", false);
-            animator.SetBool("Boost1", false);
-            animator.SetBool("Boost2", false);
         }
     }
 

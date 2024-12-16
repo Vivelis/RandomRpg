@@ -60,7 +60,9 @@ MonoBehaviour:
   speed: 4
   accuracy: 5
   attacks:
-  - {fileID: 2815212803751204278, guid: a5356b3ec88952a4d85885984048a1c8, type: 3}
+  - {fileID: 1319114292489531072, guid: 16d997bbbe7d1ca4f92dd12538baa097, type: 3}
+  - {fileID: 7193721935875524820, guid: b3657297e4b89324392f065cc68008e4, type: 3}
+  - {fileID: 70273363915590559, guid: ce1392a83893df148aeb5cfdf470b738, type: 3}
   status: 1
   atb: 0
   level: 1
@@ -111,7 +113,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1
@@ -125,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4538002791060676137}
     m_Modifications:
+    - target: {fileID: 4998367538781903434, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242664296227928697, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7361959597946656366, guid: 95b30c2632c7bbb4daeb75cdda7ae8e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

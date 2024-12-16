@@ -22,6 +22,9 @@ public class BattleManager : MonoBehaviour
 
     public Canvas canvas;
 
+    public GameObject FightCave;
+    public GameObject FightForest;
+
     // UI ------------------------------------------------
     public Transform team0UIData; 
     public Transform team1UIData;
@@ -42,6 +45,17 @@ public class BattleManager : MonoBehaviour
     void Start() {
         battleDialogueBox = GameObject.Find("DialogueText").GetComponent<BattleDialogueBox>();
         battleDialogueBox.AddDialogue("Battle start!");
+
+        if (BattleData.Instance.zoneStatus == 1)
+        {
+            FightForest.SetActive(true);
+            FightCave.SetActive(false);
+        }
+        else
+        {
+            FightCave.SetActive(true);
+            FightForest.SetActive(false);
+        }
 
         InitEnemies();
         InitFightersInBattle();
@@ -381,8 +395,10 @@ public class BattleManager : MonoBehaviour
         //battleMenu.battleFighters = battleFighters;
 
         if (team0Alive == false) {
+            BattleData.Instance.battleStatus = false;
             return 1;
         } else if (team1Alive == false) {
+            BattleData.Instance.battleStatus = true;
             return 0;
         } else {
             return -1;

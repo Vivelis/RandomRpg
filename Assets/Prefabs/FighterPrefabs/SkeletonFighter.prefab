@@ -60,7 +60,8 @@ MonoBehaviour:
   speed: 3
   accuracy: 5
   attacks:
-  - {fileID: 2815212803751204278, guid: a5356b3ec88952a4d85885984048a1c8, type: 3}
+  - {fileID: 1243302118109786175, guid: e08bd6bf8904be249943d809bc40b2e4, type: 3}
+  - {fileID: 6635717471822348347, guid: b28866a5a9df85241bf643bd536bddab, type: 3}
   status: 1
   atb: 0
   level: 1
@@ -84,7 +85,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1

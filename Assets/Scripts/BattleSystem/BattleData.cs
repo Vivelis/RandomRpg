@@ -16,6 +16,12 @@ public class BattleData : MonoBehaviour
     //1 enemy
     //2 party
 
+    public bool battleStatus = false;
+
+    public int specialBattle = 0; //1 = compagnon battle, 2 = boss battle
+
+    public int zoneStatus = 1; //1 = forest, 2 = cave
+
     public int bossFight = 0; //set to 1 to spawn boss
     public string previousScene;
     public Vector3 previousPosition = Vector3.zero;

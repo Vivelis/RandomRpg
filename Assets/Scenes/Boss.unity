@@ -1117,6 +1117,7 @@ GameObject:
   - component: {fileID: 913019409}
   - component: {fileID: 913019408}
   - component: {fileID: 913019407}
+  - component: {fileID: 913019411}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -1211,6 +1212,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &913019411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913019406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5febda6b8e960fe4b8d002172bb242ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleSceneName: BattleSystem
+  minEnemies: 1
+  maxEnemies: 3
+  possibleEnemies: []
+  encounterChance: 0
+  checkInterval: 10
+  questManager: {fileID: 678322966}
+  zoneStatus: 0
 --- !u!1001 &1100019688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1766,6 +1787,7 @@ MonoBehaviour:
   dialogueText: {fileID: 663326804}
   panel: {fileID: 663326803}
   pnjName: Compagnon
+  pnjIndex: 0
   playerController: {fileID: 1325325799}
   questDialogues:
   - questState: 0
@@ -1832,6 +1854,7 @@ MonoBehaviour:
       If the darkness returns, we will be ready.'
     - 'Lyra: (smiles softly) Yes, let us go back. But peace must not make us complacent.
       If the darkness returns, we will be ready.'
+  startBattleSpe: {fileID: 0}
 --- !u!1001 &1325325797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2286,7 +2309,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f0fd96290b176034ca53473523c5799d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -2309,6 +2332,7 @@ MonoBehaviour:
   dialogueText: {fileID: 663326804}
   panel: {fileID: 663326803}
   pnjName: "Roi d\xE9mon"
+  pnjIndex: 2
   playerController: {fileID: 1325325799}
   questDialogues:
   - questState: 0
@@ -2344,6 +2368,7 @@ MonoBehaviour:
     - 'Lyra: (firmly) No, it belongs to those who believe in hope, not you.'
     - 'Demon King (his voice fades): One day... you will see that... all this...
       will have been for nothing...'
+  startBattleSpe: {fileID: 913019411}
 --- !u!1 &1506270193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,6 +2612,83 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Cave
   interactionMessage: Entrez dans la Cave
+--- !u!1001 &1773473173
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4092336306673361236, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_Name
+      value: BattleData
+      objectReference: {fileID: 0}
+    - target: {fileID: 4092336306673361236, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: bossFight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: cooldownTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: isInCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964897972175432751, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: compagnonState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16743.164
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7306.805
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6135.6323
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629969980054717534, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e1ba4b7e9fc101d41bda91ec02978967, type: 3}
 --- !u!1001 &1889394252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2777,3 +2879,4 @@ SceneRoots:
   - {fileID: 890178860}
   - {fileID: 1114617034}
   - {fileID: 2061223311}
+  - {fileID: 1773473173}

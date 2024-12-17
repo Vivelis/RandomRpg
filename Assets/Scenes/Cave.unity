@@ -681,8 +681,8 @@ MonoBehaviour:
   minEnemies: 1
   maxEnemies: 3
   possibleEnemies: []
-  encounterChance: 1
-  checkInterval: 1
+  encounterChance: 0.6
+  checkInterval: 5
   questManager: {fileID: 36022959}
   zoneStatus: 2
 --- !u!64 &381399929

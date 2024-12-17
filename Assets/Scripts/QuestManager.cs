@@ -14,9 +14,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private BattleData battleData;
 
-    private bool isSetupBoss = false;
-    private bool isSetupCompagnon = false;
-
     private void Awake()
     {
         if (instance == null)
@@ -123,11 +120,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void Update()
     {
-        GameObject particuleObject = GameObject.Find("Particule System");
-        if (particuleObject != null && 8 <= int.Parse(currentQuestId))
-        {
-            particuleObject.SetActive(false);
-        }
         if (4 == int.Parse(currentQuestId) && BattleData.Instance.specialBattle == 1 && BattleData.Instance.battleStatus)
         {
             BattleData.Instance.specialBattle = 0;
@@ -155,14 +147,14 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                 {
                     foreach (var pnjStatus in scene.pnjStatuses)
                     {
-                        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-                        foreach (GameObject obj in allObjects)
+                        GameObject[] pnjObjects = GameObject.FindGameObjectsWithTag("PNJ");
+                        foreach (GameObject obj in pnjObjects)
                         {
-                            if (pnjStatus.pnjName == "Compagnon" && pnjStatus.active == true && obj.name == "Compagnon" && obj.scene == SceneManager.GetActiveScene())
+                            if (pnjStatus.pnjName == "Compagnon" && pnjStatus.active == true && obj.name == "Compagnon")
                             {
                                 obj.SetActive(true);
                             }
-                            else if (pnjStatus.pnjName == "Roi démon" && pnjStatus.active == true && obj.name == "Roi démon" && obj.scene == SceneManager.GetActiveScene())
+                            else if (pnjStatus.pnjName == "Roi démon" && pnjStatus.active == true && obj.name == "Roi démon")
                             {
                                 obj.SetActive(true);
                             }
@@ -201,9 +193,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         int nextQuestId = int.Parse(currentQuestId) + 1;
         currentQuestId = nextQuestId.ToString();
         onQuestStateChange.Invoke();
-        Debug.Log("Quête avancée à l'état : " + currentQuestId);
-        isSetupBoss = false;
-        isSetupCompagnon = false;
         SetupPNJsInScene();
     }
 }

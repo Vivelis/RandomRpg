@@ -9,7 +9,7 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private Vector3 defaultSpawnPosition = Vector3.zero;
     [SerializeField] private float defaultSpawnRotationY = 0f;
 
-    private void Start()
+    private void Awake()
     {
         if (GameManager.Instance != null) {
             if (GameManager.Instance.PreviousScene != null)
@@ -31,7 +31,7 @@ public class PlayerSpawner : MonoBehaviour
             if (!(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "BattleSystem")) {
                 if (BattleData.Instance != null && BattleData.Instance.previousPosition != Vector3.zero) {
                     transform.position = BattleData.Instance.previousPosition;
-                    transform.rotation = BattleData.Instance.previousCameraRotation;
+                    transform.rotation = BattleData.Instance.previousRotation;
                     BattleData.Instance.previousPosition = Vector3.zero;
                     BattleData.Instance.previousRotation = Quaternion.identity;
                     BattleData.Instance.previousCameraPosition = Vector3.zero;

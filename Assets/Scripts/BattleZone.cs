@@ -19,12 +19,13 @@ public class BattleZone : MonoBehaviour
 
     private bool isPlayerInZone = false;
     
-    public QuestManager questManager;
+    private QuestManager questManager;
 
     public int zoneStatus = 0;
 
     void Start()
     {
+        questManager = QuestManager.instance;
         battleData = BattleData.Instance;
         Assert.IsNotNull(battleData, "BattleData n'a pas �t� trouv� !");
         battleData.LaunchCooldown();
